@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://br2vvqlbokum0" path="res://sprites/Player/Player_IDLE.png" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b384h8gumq4rq" path="res://sprites/Player/Player_Walk.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://cp6m3eu2uccdv" path="res://sprites/Player/Player_Walk2.png" id="3_qhqgy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dqkch"]
 animations = [{
@@ -16,6 +17,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_qhqgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qhqgy")
 }],
 "loop": true,
 "name": &"Walk",
@@ -30,3 +34,4 @@ position = Vector2(7.75, 10)
 scale = Vector2(1.0333333, 1)
 sprite_frames = SubResource("SpriteFrames_dqkch")
 animation = &"Walk"
+frame_progress = 0.60253024
