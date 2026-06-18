@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://i0x5dwwg8ths"]
 
+[ext_resource type="Script" uid="uid://djlgjf7b4r2c7" path="res://scripts/player.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://br2vvqlbokum0" path="res://sprites/Player/Player_IDLE.png" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b384h8gumq4rq" path="res://sprites/Player/Player_Walk.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://cp6m3eu2uccdv" path="res://sprites/Player/Player_Walk2.png" id="3_qhqgy"]
@@ -26,12 +27,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(41, 47)
+
 [node name="Player" type="CharacterBody2D" unique_id=846297350]
+script = ExtResource("1_dqkch")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1880486195]
 texture_filter = 1
 position = Vector2(7.75, 10)
-scale = Vector2(1.0333333, 1)
+scale = Vector2(3, 2.904)
 sprite_frames = SubResource("SpriteFrames_dqkch")
 animation = &"Walk"
 frame_progress = 0.60253024
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1059916081]
+limit_top = 18
+limit_bottom = 500
+position_smoothing_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1243556240]
+position = Vector2(8, 12)
+shape = SubResource("RectangleShape2D_qhqgy")
