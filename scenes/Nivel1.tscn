@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bkdhgvwbowuaq" path="res://scenes/pieza_o.tscn" id="11_n60y6"]
 [ext_resource type="Texture2D" uid="uid://coddt756jsanm" path="res://sprites/bloque_rojo.png" id="11_uaxme"]
 [ext_resource type="Texture2D" uid="uid://chstqg5h68fo0" path="res://sprites/bloque_verde.png" id="12_78ob3"]
+[ext_resource type="PackedScene" uid="uid://cgqtdrfg7enyf" path="res://scenes/pieza_z.tscn" id="19_1mo0l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eogdn"]
 texture = ExtResource("5_5dgib")
@@ -2004,37 +2005,57 @@ size = Vector2(161, 479.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbdai"]
 size = Vector2(108, 111.5)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c64hm"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1mo0l"]
 texture = ExtResource("6_c64hm")
 texture_region_size = Vector2i(32, 32)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1mo0l"]
-texture = ExtResource("7_1mo0l")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrv56"]
-texture = ExtResource("8_wrv56")
+texture = ExtResource("7_1mo0l")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1dxen"]
-texture = ExtResource("9_1dxen")
+texture = ExtResource("8_wrv56")
 texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oed2h"]
-texture = ExtResource("10_oed2h")
+texture = ExtResource("9_1dxen")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uaxme"]
-texture = ExtResource("11_uaxme")
+texture = ExtResource("10_oed2h")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78ob3"]
+texture = ExtResource("11_uaxme")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cevo"]
 texture = ExtResource("12_78ob3")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -16)
 
 [sub_resource type="TileSet" id="TileSet_nnl18"]
-sources/3 = SubResource("TileSetAtlasSource_wrv56")
-sources/4 = SubResource("TileSetAtlasSource_1dxen")
-sources/5 = SubResource("TileSetAtlasSource_oed2h")
-sources/6 = SubResource("TileSetAtlasSource_uaxme")
-sources/7 = SubResource("TileSetAtlasSource_78ob3")
-sources/2 = SubResource("TileSetAtlasSource_1mo0l")
-sources/1 = SubResource("TileSetAtlasSource_c64hm")
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/7 = SubResource("TileSetAtlasSource_6cevo")
+sources/1 = SubResource("TileSetAtlasSource_1mo0l")
+sources/2 = SubResource("TileSetAtlasSource_wrv56")
+sources/3 = SubResource("TileSetAtlasSource_1dxen")
+sources/4 = SubResource("TileSetAtlasSource_oed2h")
+sources/5 = SubResource("TileSetAtlasSource_uaxme")
+sources/6 = SubResource("TileSetAtlasSource_78ob3")
 
 [node name="Nivel1" type="Node2D" unique_id=2045379988]
 
@@ -2115,6 +2136,10 @@ script = ExtResource("7_eogdn")
 position = Vector2(1489, 429.25)
 shape = SubResource("RectangleShape2D_hbdai")
 
+[node name="CapaPiezas" type="TileMapLayer" parent="." unique_id=1260544706 groups=["CapaPiezas"]]
+z_index = 10
+tile_set = SubResource("TileSet_nnl18")
+
 [node name="PiezaT" parent="." unique_id=2111717301 instance=ExtResource("8_liwgf")]
 position = Vector2(704, 416)
 
@@ -2127,7 +2152,7 @@ position = Vector2(992, 384)
 [node name="PiezaO" parent="." unique_id=726633488 instance=ExtResource("11_n60y6")]
 position = Vector2(1056, 416)
 
-[node name="CapaPiezas" type="TileMapLayer" parent="." unique_id=1260544706 groups=["CapaPiezas"]]
-tile_set = SubResource("TileSet_nnl18")
+[node name="PiezaZ" parent="." unique_id=741481720 instance=ExtResource("19_1mo0l")]
+position = Vector2(544, 384)
 
 [connection signal="body_entered" from="ZonaSecreta" to="ZonaSecreta" method="_on_body_entered"]
