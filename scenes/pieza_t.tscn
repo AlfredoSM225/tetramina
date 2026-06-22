@@ -8,10 +8,10 @@ texture_filter = 1
 [node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_wxkl3")]
 
 [node name="BloqueIndividual2" parent="." unique_id=870852538 instance=ExtResource("1_wxkl3")]
-position = Vector2(0, -14)
+position = Vector2(0, -16)
 
 [node name="BloqueIndividual3" parent="." unique_id=483051521 instance=ExtResource("1_wxkl3")]
-position = Vector2(-14, 0)
+position = Vector2(-16, 0)
 
 [node name="BloqueIndividual4" parent="." unique_id=54688087 instance=ExtResource("1_wxkl3")]
-position = Vector2(14, 0)
+position = Vector2(16, 0)
