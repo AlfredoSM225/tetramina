@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b3woxie4158rd"]
+
+[ext_resource type="Script" uid="uid://d3piptru5hv1l" path="res://scripts/PiezaBase.gd" id="1_5tbdv"]
+[ext_resource type="PackedScene" uid="uid://utmjj82qqb83" path="res://scenes/bloque_individual.tscn" id="1_gn2m1"]
+
+[node name="Piezai" type="CharacterBody2D" unique_id=2111717301]
+texture_filter = 1
+script = ExtResource("1_5tbdv")
+color_pieza = "Aqua"
+id_tileset = 2
+
+[node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_gn2m1")]
+position = Vector2(16, 16)
+
+[node name="BloqueIndividual2" parent="." unique_id=870852538 instance=ExtResource("1_gn2m1")]
+position = Vector2(16, -16)
+
+[node name="BloqueIndividual3" parent="." unique_id=483051521 instance=ExtResource("1_gn2m1")]
+position = Vector2(16, -48)
+
+[node name="BloqueIndividual4" parent="." unique_id=54688087 instance=ExtResource("1_gn2m1")]
+position = Vector2(16, 48)

@@ -1,11 +1,78 @@
 [gd_scene format=3 uid="uid://utmjj82qqb83"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qks"]
-size = Vector2(14, 14)
+[ext_resource type="Texture2D" uid="uid://de8ka5yhq4lv0" path="res://sprites/bloque_amarillo.png" id="1_buaj3"]
+[ext_resource type="Texture2D" uid="uid://d2u5ir0evohqn" path="res://sprites/bloque_aqua.png" id="2_dgkvy"]
+[ext_resource type="Texture2D" uid="uid://bbfgqbokgjf0r" path="res://sprites/bloque_azul.png" id="3_yd1me"]
+[ext_resource type="Texture2D" uid="uid://m5tqe3ctofiq" path="res://sprites/bloque_morado.png" id="4_opgb8"]
+[ext_resource type="Texture2D" uid="uid://bc18ft35es7q1" path="res://sprites/bloque_naranja.png" id="5_iy1pu"]
+[ext_resource type="Texture2D" uid="uid://coddt756jsanm" path="res://sprites/bloque_rojo.png" id="6_cny2h"]
+[ext_resource type="Texture2D" uid="uid://chstqg5h68fo0" path="res://sprites/bloque_verde.png" id="7_6oxub"]
 
-[node name="BloqueIndividual" type="StaticBody2D" unique_id=825388252]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgkvy"]
+size = Vector2(32, 32)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=142513644]
+[sub_resource type="SpriteFrames" id="SpriteFrames_o5qks"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_buaj3")
+}],
+"loop": false,
+"name": &"Amarillo",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dgkvy")
+}],
+"loop": false,
+"name": &"Aqua",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_yd1me")
+}],
+"loop": false,
+"name": &"Azul",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_opgb8")
+}],
+"loop": false,
+"name": &"Morado",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_iy1pu")
+}],
+"loop": false,
+"name": &"Naranja",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_cny2h")
+}],
+"loop": false,
+"name": &"Rojo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_6oxub")
+}],
+"loop": false,
+"name": &"Verde",
+"speed": 5.0
+}]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591967674]
-shape = SubResource("RectangleShape2D_o5qks")
+[node name="BloqueIndividual" type="CollisionShape2D" unique_id=1159988353]
+shape = SubResource("RectangleShape2D_dgkvy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1581630823]
+sprite_frames = SubResource("SpriteFrames_o5qks")
+animation = &"Naranja"
