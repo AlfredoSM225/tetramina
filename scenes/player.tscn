@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://br2vvqlbokum0" path="res://sprites/Player/Player_IDLE.png" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b384h8gumq4rq" path="res://sprites/Player/Player_Walk.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://cp6m3eu2uccdv" path="res://sprites/Player/Player_Walk2.png" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://c1tf0vwoe7d2j" path="res://sprites/Player/Player_Walk3.png" id="5_qlg0r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dqkch"]
 animations = [{
@@ -21,10 +22,16 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_qhqgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qlg0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qhqgy")
 }],
 "loop": true,
 "name": &"Walk",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
@@ -40,7 +47,7 @@ position = Vector2(7.75, 10)
 scale = Vector2(3, 2.904)
 sprite_frames = SubResource("SpriteFrames_dqkch")
 animation = &"Walk"
-frame_progress = 0.60253024
+frame_progress = 0.47523767
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1059916081]
 offset = Vector2(0, -80)
