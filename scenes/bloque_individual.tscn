@@ -14,15 +14,15 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_buaj3")
 }],
-"loop": true,
+"loop": false,
 "name": &"Amarillo",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_dgkvy")
 }],
-"loop": true,
+"loop": false,
 "name": &"Aqua",
 "speed": 5.0
 }, {
@@ -30,7 +30,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_yd1me")
 }],
-"loop": true,
+"loop": false,
 "name": &"Azul",
 "speed": 5.0
 }, {
@@ -38,7 +38,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_opgb8")
 }],
-"loop": true,
+"loop": false,
 "name": &"Morado",
 "speed": 5.0
 }, {
@@ -46,7 +46,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_iy1pu")
 }],
-"loop": true,
+"loop": false,
 "name": &"Naranja",
 "speed": 5.0
 }, {
@@ -54,7 +54,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_cny2h")
 }],
-"loop": true,
+"loop": false,
 "name": &"Rojo",
 "speed": 5.0
 }, {
@@ -62,7 +62,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_6oxub")
 }],
-"loop": true,
+"loop": false,
 "name": &"Verde",
 "speed": 5.0
 }]
@@ -72,9 +72,9 @@ size = Vector2(16, 16)
 
 [node name="BloqueIndividual" type="StaticBody2D" unique_id=825388252]
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1581630823]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1581630823]
 sprite_frames = SubResource("SpriteFrames_o5qks")
-animation = &"Morado"
+animation = &"Verde"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591967674]
 shape = SubResource("RectangleShape2D_o5qks")

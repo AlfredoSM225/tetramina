@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bkdhgvwbowuaq"]
+
+[ext_resource type="Script" uid="uid://d3piptru5hv1l" path="res://scripts/PiezaBase.gd" id="1_gtslb"]
+[ext_resource type="PackedScene" uid="uid://utmjj82qqb83" path="res://scenes/bloque_individual.tscn" id="1_h7nk4"]
+
+[node name="PiezaO" type="CharacterBody2D" unique_id=2111717301]
+texture_filter = 1
+scale = Vector2(2, 2)
+script = ExtResource("1_gtslb")
+color_pieza = "Amarillo"
+
+[node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_h7nk4")]
+position = Vector2(-8, 8)
+
+[node name="BloqueIndividual2" parent="." unique_id=870852538 instance=ExtResource("1_h7nk4")]
+position = Vector2(-8, -8)
+
+[node name="BloqueIndividual3" parent="." unique_id=483051521 instance=ExtResource("1_h7nk4")]
+position = Vector2(8, 8)
+
+[node name="BloqueIndividual4" parent="." unique_id=54688087 instance=ExtResource("1_h7nk4")]
+position = Vector2(8, -8)

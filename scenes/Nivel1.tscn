@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://u85dbhxwx2b6" path="res://sprites/mainlev_build.png" id="5_5dgib"]
 [ext_resource type="PackedScene" uid="uid://i0x5dwwg8ths" path="res://scenes/player.tscn" id="6_al5x1"]
 [ext_resource type="Script" uid="uid://wcqyd65bogp4" path="res://scripts/zona_secreta.gd" id="7_eogdn"]
+[ext_resource type="PackedScene" uid="uid://crst01jvi6jcb" path="res://scenes/pieza_t.tscn" id="8_liwgf"]
+[ext_resource type="PackedScene" uid="uid://clwak2svxauco" path="res://scenes/pieza_L.tscn" id="9_s8v6d"]
+[ext_resource type="PackedScene" uid="uid://b3woxie4158rd" path="res://scenes/pieza_i.tscn" id="10_hbdai"]
+[ext_resource type="PackedScene" uid="uid://bkdhgvwbowuaq" path="res://scenes/pieza_o.tscn" id="11_n60y6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eogdn"]
 texture = ExtResource("5_5dgib")
@@ -2061,7 +2065,7 @@ tile_set = SubResource("TileSet_s8v6d")
 [node name="StaticBody2D" type="StaticBody2D" parent="Tile frente" unique_id=135472221]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tile frente/StaticBody2D" unique_id=438719779]
-position = Vector2(-897, 234)
+position = Vector2(-865, 233)
 shape = SubResource("RectangleShape2D_al5x1")
 
 [node name="ZonaSecreta" type="Area2D" parent="." unique_id=1440609275]
@@ -2071,5 +2075,17 @@ script = ExtResource("7_eogdn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaSecreta" unique_id=1670192847]
 position = Vector2(1489, 429.25)
 shape = SubResource("RectangleShape2D_hbdai")
+
+[node name="PiezaT" parent="." unique_id=2111717301 instance=ExtResource("8_liwgf")]
+position = Vector2(704, 415)
+
+[node name="PiezaL" parent="." unique_id=1582342660 instance=ExtResource("9_s8v6d")]
+position = Vector2(768, 383)
+
+[node name="Piezai" parent="." unique_id=1024636429 instance=ExtResource("10_hbdai")]
+position = Vector2(992, 384)
+
+[node name="PiezaO" parent="." unique_id=726633488 instance=ExtResource("11_n60y6")]
+position = Vector2(1056, 416)
 
 [connection signal="body_entered" from="ZonaSecreta" to="ZonaSecreta" method="_on_body_entered"]
