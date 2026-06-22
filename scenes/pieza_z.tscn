@@ -5,17 +5,16 @@
 
 [node name="PiezaZ" type="CharacterBody2D" unique_id=2111717301]
 texture_filter = 1
-scale = Vector2(2, 2)
 script = ExtResource("1_lb0q2")
 
 [node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_mein4")]
-position = Vector2(8, 8)
+position = Vector2(16, 16)
 
 [node name="BloqueIndividual2" parent="." unique_id=870852538 instance=ExtResource("1_mein4")]
-position = Vector2(8, -8)
+position = Vector2(16, -16)
 
 [node name="BloqueIndividual3" parent="." unique_id=483051521 instance=ExtResource("1_mein4")]
-position = Vector2(-8, -8)
+position = Vector2(-16, -16)
 
 [node name="BloqueIndividual4" parent="." unique_id=54688087 instance=ExtResource("1_mein4")]
-position = Vector2(24, 8)
+position = Vector2(48, 16)

@@ -47,11 +47,11 @@ script = ExtResource("1_dqkch")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1880486195]
 texture_filter = 1
-position = Vector2(7.75, 10)
+position = Vector2(23, 29)
 scale = Vector2(3, 2.904)
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"Walk"
-frame_progress = 0.0031298464
+animation = &"IDLE"
+frame_progress = 0.36612877
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1059916081]
 offset = Vector2(0, -80)
@@ -67,5 +67,5 @@ drag_top_margin = 1.0
 drag_bottom_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1243556240]
-position = Vector2(8, 12)
+position = Vector2(22, 29)
 shape = SubResource("CapsuleShape2D_dqkch")

@@ -5,18 +5,17 @@
 
 [node name="PiezaL" type="CharacterBody2D" unique_id=2111717301]
 texture_filter = 1
-scale = Vector2(2, 2)
 script = ExtResource("1_gu44c")
 color_pieza = "Naranja"
 
 [node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_k4d2j")]
-position = Vector2(-8, 8)
+position = Vector2(-16, 16)
 
 [node name="BloqueIndividual2" parent="." unique_id=870852538 instance=ExtResource("1_k4d2j")]
-position = Vector2(-8, -8)
+position = Vector2(-16, -16)
 
 [node name="BloqueIndividual3" parent="." unique_id=483051521 instance=ExtResource("1_k4d2j")]
-position = Vector2(-8, -24)
+position = Vector2(-16, -48)
 
 [node name="BloqueIndividual4" parent="." unique_id=54688087 instance=ExtResource("1_k4d2j")]
-position = Vector2(8, 8)
+position = Vector2(16, 16)

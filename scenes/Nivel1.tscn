@@ -6,11 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://dd23tsga4dpt8" path="res://sprites/background4a.png" id="4_eogdn"]
 [ext_resource type="Texture2D" uid="uid://u85dbhxwx2b6" path="res://sprites/mainlev_build.png" id="5_5dgib"]
 [ext_resource type="PackedScene" uid="uid://i0x5dwwg8ths" path="res://scenes/player.tscn" id="6_al5x1"]
+[ext_resource type="Texture2D" uid="uid://de8ka5yhq4lv0" path="res://sprites/bloque_amarillo.png" id="6_c64hm"]
+[ext_resource type="Texture2D" uid="uid://d2u5ir0evohqn" path="res://sprites/bloque_aqua.png" id="7_1mo0l"]
 [ext_resource type="Script" uid="uid://wcqyd65bogp4" path="res://scripts/zona_secreta.gd" id="7_eogdn"]
 [ext_resource type="PackedScene" uid="uid://crst01jvi6jcb" path="res://scenes/pieza_t.tscn" id="8_liwgf"]
+[ext_resource type="Texture2D" uid="uid://bbfgqbokgjf0r" path="res://sprites/bloque_azul.png" id="8_wrv56"]
+[ext_resource type="Texture2D" uid="uid://m5tqe3ctofiq" path="res://sprites/bloque_morado.png" id="9_1dxen"]
 [ext_resource type="PackedScene" uid="uid://clwak2svxauco" path="res://scenes/pieza_L.tscn" id="9_s8v6d"]
 [ext_resource type="PackedScene" uid="uid://b3woxie4158rd" path="res://scenes/pieza_i.tscn" id="10_hbdai"]
+[ext_resource type="Texture2D" uid="uid://bc18ft35es7q1" path="res://sprites/bloque_naranja.png" id="10_oed2h"]
 [ext_resource type="PackedScene" uid="uid://bkdhgvwbowuaq" path="res://scenes/pieza_o.tscn" id="11_n60y6"]
+[ext_resource type="Texture2D" uid="uid://coddt756jsanm" path="res://sprites/bloque_rojo.png" id="11_uaxme"]
+[ext_resource type="Texture2D" uid="uid://chstqg5h68fo0" path="res://sprites/bloque_verde.png" id="12_78ob3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eogdn"]
 texture = ExtResource("5_5dgib")
@@ -1997,6 +2004,38 @@ size = Vector2(161, 479.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbdai"]
 size = Vector2(108, 111.5)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c64hm"]
+texture = ExtResource("6_c64hm")
+texture_region_size = Vector2i(32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1mo0l"]
+texture = ExtResource("7_1mo0l")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrv56"]
+texture = ExtResource("8_wrv56")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1dxen"]
+texture = ExtResource("9_1dxen")
+texture_region_size = Vector2i(32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oed2h"]
+texture = ExtResource("10_oed2h")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uaxme"]
+texture = ExtResource("11_uaxme")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78ob3"]
+texture = ExtResource("12_78ob3")
+
+[sub_resource type="TileSet" id="TileSet_nnl18"]
+sources/3 = SubResource("TileSetAtlasSource_wrv56")
+sources/4 = SubResource("TileSetAtlasSource_1dxen")
+sources/5 = SubResource("TileSetAtlasSource_oed2h")
+sources/6 = SubResource("TileSetAtlasSource_uaxme")
+sources/7 = SubResource("TileSetAtlasSource_78ob3")
+sources/2 = SubResource("TileSetAtlasSource_1mo0l")
+sources/1 = SubResource("TileSetAtlasSource_c64hm")
+
 [node name="Nivel1" type="Node2D" unique_id=2045379988]
 
 [node name="Fondo" type="Node2D" parent="." unique_id=526551433]
@@ -2050,7 +2089,7 @@ tile_map_data = PackedByteArray("AAAAABwAAAAVABcAAAAAAB0AAAAVABgAAAABABwAAAAWABc
 tile_set = SubResource("TileSet_liwgf")
 
 [node name="Player" parent="." unique_id=846297350 instance=ExtResource("6_al5x1")]
-position = Vector2(359, 308)
+position = Vector2(416, 384)
 
 [node name="Tile frente" type="Node2D" parent="." unique_id=130192609]
 
@@ -2077,15 +2116,18 @@ position = Vector2(1489, 429.25)
 shape = SubResource("RectangleShape2D_hbdai")
 
 [node name="PiezaT" parent="." unique_id=2111717301 instance=ExtResource("8_liwgf")]
-position = Vector2(704, 415)
+position = Vector2(704, 416)
 
 [node name="PiezaL" parent="." unique_id=1582342660 instance=ExtResource("9_s8v6d")]
-position = Vector2(768, 383)
+position = Vector2(832, 352)
 
 [node name="Piezai" parent="." unique_id=1024636429 instance=ExtResource("10_hbdai")]
 position = Vector2(992, 384)
 
 [node name="PiezaO" parent="." unique_id=726633488 instance=ExtResource("11_n60y6")]
 position = Vector2(1056, 416)
+
+[node name="CapaPiezas" type="TileMapLayer" parent="." unique_id=1260544706 groups=["CapaPiezas"]]
+tile_set = SubResource("TileSet_nnl18")
 
 [connection signal="body_entered" from="ZonaSecreta" to="ZonaSecreta" method="_on_body_entered"]

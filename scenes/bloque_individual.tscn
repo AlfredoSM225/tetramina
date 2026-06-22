@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://coddt756jsanm" path="res://sprites/bloque_rojo.png" id="6_cny2h"]
 [ext_resource type="Texture2D" uid="uid://chstqg5h68fo0" path="res://sprites/bloque_verde.png" id="7_6oxub"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgkvy"]
+size = Vector2(32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_o5qks"]
 animations = [{
 "frames": [{
@@ -67,14 +70,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qks"]
-size = Vector2(16, 16)
-
-[node name="BloqueIndividual" type="StaticBody2D" unique_id=825388252]
+[node name="BloqueIndividual" type="CollisionShape2D" unique_id=1159988353]
+shape = SubResource("RectangleShape2D_dgkvy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1581630823]
 sprite_frames = SubResource("SpriteFrames_o5qks")
-animation = &"Verde"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591967674]
-shape = SubResource("RectangleShape2D_o5qks")
+animation = &"Naranja"
