@@ -56,7 +56,7 @@ func buscar_y_controlar_pieza():
 	# Obtiene todas las piezas del nivel (veremos esto en el script de la pieza)
 	var piezas = get_tree().get_nodes_in_group("Piezas")
 	var pieza_mas_cercana = null
-	var distancia_minima = 60.0 # Rango de alcance del poder en píxeles
+	var distancia_minima = 100.0 # Rango de alcance del poder en píxeles
 
 	for pieza in piezas:
 		var dist = global_position.distance_to(pieza.global_position)

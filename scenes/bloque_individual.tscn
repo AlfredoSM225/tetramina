@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://chstqg5h68fo0" path="res://sprites/bloque_verde.png" id="7_6oxub"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgkvy"]
-size = Vector2(32, 32)
+size = Vector2(30, 30)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o5qks"]
 animations = [{
