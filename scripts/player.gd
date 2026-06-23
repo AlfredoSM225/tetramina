@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 const SPEED = 150.0
-const JUMP_VELOCITY = -350.0
+const JUMP_VELOCITY = -300.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 # Obtiene la gravedad de la configuración de Godot
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -30,7 +30,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Salto del jugador
-	if Input.is_action_just_pressed("Up") and is_on_floor():
+	if Input.is_action_just_pressed("Up"):
 		velocity.y = JUMP_VELOCITY
 
 	# Movimiento horizontal

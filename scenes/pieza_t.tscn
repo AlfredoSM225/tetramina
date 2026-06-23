@@ -7,7 +7,7 @@
 texture_filter = 1
 script = ExtResource("1_c5v6g")
 color_pieza = "Morado"
-id_tileset = 4
+id_tileset = 3
 
 [node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_wxkl3")]
 position = Vector2(16, 16)
