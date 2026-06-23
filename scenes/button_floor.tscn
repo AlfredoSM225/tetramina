@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://b8er00o8xwx30"]
+
+[ext_resource type="Script" uid="uid://csxrs56ecixcp" path="res://scripts/button_floor.gd" id="1_2asj4"]
+[ext_resource type="Texture2D" uid="uid://yty3jlcf87cy" path="res://sprites/Button_pressed.png" id="1_33djs"]
+[ext_resource type="Texture2D" uid="uid://b21c1muwgd6qc" path="res://sprites/Button_unpressed.png" id="2_2asj4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_135u6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_33djs")
+}],
+"loop": true,
+"name": &"Pressed",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2asj4")
+}],
+"loop": true,
+"name": &"Unpressed",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xpfe"]
+size = Vector2(78, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_135u6"]
+size = Vector2(73, 14)
+
+[node name="Button_Floor" type="StaticBody2D" unique_id=757553749]
+script = ExtResource("1_2asj4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=453534054]
+sprite_frames = SubResource("SpriteFrames_135u6")
+animation = &"Unpressed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1636607240]
+position = Vector2(0, 14)
+shape = SubResource("RectangleShape2D_4xpfe")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1880751157]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=395417668]
+position = Vector2(1, -6)
+shape = SubResource("RectangleShape2D_135u6")
+debug_color = Color(0.6649465, 0.38777602, 0.8553289, 0.41960785)
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]
