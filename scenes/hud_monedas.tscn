@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bn0spdv3calru"]
+
+[ext_resource type="Script" uid="uid://da2l23rr4xn2i" path="res://scripts/HUDmonedas.gd" id="1_qky32"]
+[ext_resource type="Texture2D" uid="uid://3ncyg5sn7e5i" path="res://sprites/Moneda1.png" id="2_w2veg"]
+[ext_resource type="FontFile" uid="uid://blsuaq43hp0m7" path="res://fonts/PixeloidSans-Bold.ttf" id="3_o3a4q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5yrgq"]
+font = ExtResource("3_o3a4q")
+
+[node name="HudMonedas" type="CanvasLayer" unique_id=1864820875]
+
+[node name="Control" type="Control" parent="." unique_id=1847041785]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qky32")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=290993265]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 5
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer" unique_id=249905762]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_w2veg")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Control/HBoxContainer" unique_id=1546205449]
+layout_mode = 2
+text = "0 / 3"
+label_settings = SubResource("LabelSettings_5yrgq")

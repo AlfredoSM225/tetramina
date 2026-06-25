@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 ScriptGlobal="*uid://bdjgtnxld8ht7"
+GameManager="*uid://k00qdhd41mwv"
 
 [display]
 

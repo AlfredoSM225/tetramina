@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dkio6k5dablqx"]
+
+[ext_resource type="Texture2D" uid="uid://3ncyg5sn7e5i" path="res://sprites/Moneda1.png" id="1_ntwu4"]
+[ext_resource type="Script" uid="uid://dmdurnr4s360p" path="res://scripts/moneda.gd" id="1_rpdy3"]
+[ext_resource type="Texture2D" uid="uid://cff8h2dl3hca1" path="res://sprites/Moneda2.png" id="2_rpdy3"]
+[ext_resource type="Texture2D" uid="uid://ctboebyk432r2" path="res://sprites/Moneda3.png" id="3_251xu"]
+[ext_resource type="Texture2D" uid="uid://eioxi6jqdemw" path="res://sprites/Moneda4.png" id="4_gbw8t"]
+[ext_resource type="Texture2D" uid="uid://casxwc8vnheuc" path="res://sprites/Moneda5.png" id="5_v13fc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkpt8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ntwu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rpdy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_251xu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gbw8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v13fc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdqex"]
+size = Vector2(1.090986, 37)
+
+[node name="Moneda" type="Area2D" unique_id=818063730]
+script = ExtResource("1_rpdy3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=344349136]
+texture_filter = 1
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_mkpt8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=682147009]
+position = Vector2(1.5258789e-05, -9.536743e-07)
+scale = Vector2(47.19612, -1.356147)
+shape = SubResource("RectangleShape2D_wdqex")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

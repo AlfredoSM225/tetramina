@@ -6,7 +6,6 @@ extends Area2D
 var ya_descubierto: bool = false
 
 func _ready() -> void:
-	# Conectamos la señal que detecta cuando entra el jugador
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:

@@ -10,6 +10,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Variable que define si estamos controlando una pieza
 var pieza_controlada: Node2D = null
 
+func _ready() -> void:
+	add_to_group("jugador")
+
 func _physics_process(delta):
 	# === MODO TELEQUINESIS (Jugador IDLE) ===
 	if pieza_controlada != null:
