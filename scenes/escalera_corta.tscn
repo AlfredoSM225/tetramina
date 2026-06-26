@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dn8qsq4fvnfi6"]
+
+[ext_resource type="Script" uid="uid://bvky00wkbq04k" path="res://scripts/escalera.gd" id="1_0i13x"]
+[ext_resource type="Texture2D" uid="uid://bewg17cqnxc3v" path="res://sprites/escalera.png" id="2_oqrfo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8b4et"]
+size = Vector2(32, 672)
+
+[node name="Escalera" type="Area2D" unique_id=1271918855]
+script = ExtResource("1_0i13x")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1124627999]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, 16.999998)
+scale = Vector2(2.2118418, 2.1042657)
+texture = ExtResource("2_oqrfo")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 288)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=965801289]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_8b4et")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

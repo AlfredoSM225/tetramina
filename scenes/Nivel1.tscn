@@ -4129,6 +4129,9 @@ position = Vector2(32, 24)
 [node name="Moneda" parent="Monedas" unique_id=818063730 instance=ExtResource("25_6ddix")]
 position = Vector2(-704, 272)
 
+[node name="Moneda2" parent="Monedas" unique_id=1897139955 instance=ExtResource("25_6ddix")]
+position = Vector2(2221, 1069)
+
 [node name="HudMonedas" parent="." unique_id=1864820875 instance=ExtResource("26_xsk1d")]
 
 [connection signal="body_entered" from="ZonaSecreta" to="ZonaSecreta" method="_on_body_entered"]
