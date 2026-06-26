@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://k7k2k2iwknlo"]
+
+[ext_resource type="Texture2D" uid="uid://b15f27viqyse7" path="res://sprites/pixellab-2d-well-for-a-cave-aestetic--1782497164073.png" id="1_kq3od"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tb3fv"]
+size = Vector2(30, 108)
+
+[node name="Pozo" type="Area2D" unique_id=2029545421]
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1197111484]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_kq3od")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1879720368]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1947113447]
+position = Vector2(79, 125)
+shape = SubResource("RectangleShape2D_tb3fv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1200137659]
+position = Vector2(-82, 124)
+shape = SubResource("RectangleShape2D_tb3fv")
