@@ -23,3 +23,11 @@ func _on_area_2d_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index
 	sprite.play("Unpressed")
 	if puerta_objetivo:
 		puerta_objetivo.set_abierta(false)
+
+
+
+
+func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	sprite.play("Pressed")
+	if puerta_objetivo:
+		puerta_objetivo.set_abierta(true)

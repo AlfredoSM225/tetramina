@@ -6,6 +6,7 @@
 [node name="PiezaS" type="CharacterBody2D" unique_id=2111717301]
 texture_filter = 1
 script = ExtResource("1_be0v2")
+ruta_escena = "res://scenes/pieza_s.tscn"
 color_pieza = "Verde"
 id_tileset = 6
 

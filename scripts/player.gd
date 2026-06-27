@@ -105,10 +105,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # Busca la pieza más cercana en la cueva
 func buscar_y_controlar_pieza():
-	# Obtiene todas las piezas del nivel (veremos esto en el script de la pieza)
+	# 1. Buscar piezas físicas sueltas
 	var piezas = get_tree().get_nodes_in_group("Piezas")
 	var pieza_mas_cercana = null
-	var distancia_minima = 100.0 # Rango de alcance del poder en píxeles
+	var distancia_minima = 100.0
 
 	for pieza in piezas:
 		var dist = global_position.distance_to(pieza.global_position)
@@ -116,11 +116,31 @@ func buscar_y_controlar_pieza():
 			distancia_minima = dist
 			pieza_mas_cercana = pieza
 
-	# Si encontró una pieza cerca, le cedemos el control
 	if pieza_mas_cercana != null:
 		escalando = false
 		pieza_controlada = pieza_mas_cercana
 		pieza_mas_cercana.activar_control(self)
+		return
+		
+	# 2. Si no hay piezas físicas, intentar arrancar una del mapa
+	var mapa = get_tree().get_first_node_in_group("CapaPiezas") as TileMapLayer
+	if mapa:
+		var pos_local_jugador = mapa.to_local(global_position)
+		var pos_mapa_jugador = mapa.local_to_map(pos_local_jugador)
+		
+		# Escanear un rango de 2 celdas alrededor del jugador
+		for dx in range(-2, 3):
+			for dy in range(-2, 3):
+				var celda_revisar = pos_mapa_jugador + Vector2i(dx, dy)
+				var pieza_revivida = ScriptGlobal.intentar_recuperar_pieza(celda_revisar)
+				
+				if pieza_revivida:
+					escalando = false
+					pieza_controlada = pieza_revivida
+					# Esperamos a que Godot la dibuje para no causar un bug de físicas
+					await get_tree().process_frame
+					pieza_revivida.activar_control(self)
+					return
 
 # Esta función es llamada por la pieza JUSTO después de colocarse
 func recuperar_control():

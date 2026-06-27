@@ -6,6 +6,7 @@
 [node name="Piezai" type="CharacterBody2D" unique_id=2111717301]
 texture_filter = 1
 script = ExtResource("1_5tbdv")
+ruta_escena = "res://scenes/pieza_i.tscn"
 color_pieza = "Aqua"
 
 [node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_gn2m1")]
