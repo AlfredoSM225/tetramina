@@ -1,29 +1,35 @@
 extends Area2D
 
-# Arrastra aquí tu nodo de bloques secretos desde el árbol de escenas si el nombre cambia
-@onready var capa_secreta: TileMapLayer = $"../Tile frente/TileMapLayer_Secretos2"
+# Rutas de los nodos basadas en tu jerarquía
+@onready var capa_secreta1: TileMapLayer = $"../Tile frente/Castillo Frente"
+@onready var capa_secreta2: TileMapLayer = $"../Tile frente/Castillo Frente3"
 
-var ya_descubierto: bool = false
+# Variable para controlar el Tween activo y evitar que se encimen las animaciones
+var active_tween: Tween = null
 
 func _ready() -> void:
-	# Conectamos la señal que detecta cuando entra el jugador
+	# Conectamos las dos señales necesarias: entrada y salida
 	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body: Node2D) -> void:
-	# Verificamos que lo que entró sea un CharacterBody2D y que no se haya descubierto antes
-	if body is CharacterBody2D and not ya_descubierto:
-		ya_descubierto = true
-		desvanecer_zona()
+	# Si entra el jugador, desvanecemos el muro (opacidad a 0.0)
+	if body.is_in_group("jugador"):
+		transicionar_muro(0.0)
 
-func desvanecer_zona() -> void:
-	# Creamos la animación por código
-	var tween = create_tween()
+func _on_body_exited(body: Node2D) -> void:
+	# Si sale el jugador, volvemos a mostrar el muro (opacidad a 1.0)
+	if body.is_in_group("jugador"):
+		transicionar_muro(1.0)
+
+func transicionar_muro(target_alpha: float) -> void:
+	# Si había una animación corriendo, la detenemos para que no parpadee
+	if active_tween and active_tween.is_running():
+		active_tween.kill()
 	
-	# Cambia el '0.5' por el tiempo que quieras. 
-	# Por ejemplo, '1.5' hará que tarde segundo y medio en desaparecer por completo.
-	tween.tween_property(capa_secreta, "modulate:a", 0.0, 1.5)
+	active_tween = create_tween()
+	active_tween.set_parallel(true) # Ambas capas cambian al mismo tiempo
 	
-	# Esperamos a que termine la animación antes de borrar los nodos
-	await tween.finished
-	capa_secreta.queue_free()
-	queue_free()
+	# === MÁS RÁPIDO: Cambiamos el tiempo de 1.5 a 0.4 segundos ===
+	active_tween.tween_property(capa_secreta1, "modulate:a", target_alpha, 0.4)
+	active_tween.tween_property(capa_secreta2, "modulate:a", target_alpha, 0.4)
