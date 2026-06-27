@@ -1,8 +1,7 @@
 extends Node
 
-var bloques_para_linea = 8 
+var bloques_para_linea = 9
 
-# === MEMORIA DE PIEZAS ===
 var registro_piezas = {} 
 var celda_a_pieza = {}   
 
@@ -70,21 +69,21 @@ func revisar_lineas_completas():
 						registro_piezas[id_p]["celdas"].erase(celda)
 					celda_a_pieza.erase(celda)
 		
-		# Recopilamos todos los mapas sólidos (Tu cueva, paredes, etc.) ignorando los fondos sin físicas
 		var mapas_colision = []
 		if get_tree().current_scene:
 			var todos_tilemaps = get_tree().current_scene.find_children("*", "TileMapLayer", true, false)
 			for tm in todos_tilemaps:
 				if tm != capa_piezas and tm.tile_set != null:
-					# Si tiene físicas, significa que es un muro o suelo real
 					if tm.tile_set.get_physics_layers_count() > 0:
 						mapas_colision.append(tm)
 		
-		aplicar_gravedad_aislada(capa_piezas, columnas_afectadas, y_max_borrado, celdas_borradas, mapas_colision)
-		await get_tree().process_frame
+		# === EL SECRETO: AWAIT ===
+		# El código se pausará aquí y esperará a que termine toda la animación de caída
+		await aplicar_gravedad_aislada(capa_piezas, columnas_afectadas, y_max_borrado, celdas_borradas, mapas_colision)
+		
+		# Una vez que terminen de caer, volvemos a revisar por si hicieron COMBO
 		revisar_lineas_completas()
 
-# === NUEVO RADAR: Verifica si una celda está vacía tanto en el Tetris como en la Cueva ===
 func es_celda_libre(coord: Vector2i, capa_piezas: TileMapLayer, mapas_colision: Array) -> bool:
 	if capa_piezas.get_cell_source_id(coord) != -1:
 		return false
@@ -99,17 +98,17 @@ func es_celda_libre(coord: Vector2i, capa_piezas: TileMapLayer, mapas_colision: 
 			
 	return true
 
-# === LA NUEVA GRAVEDAD PROFUNDA ===
+# === CORRUTINA DE CAÍDA ANIMADA ===
 func aplicar_gravedad_aislada(capa: TileMapLayer, columnas_afectadas: Array, y_max_global: int, celdas_borradas: Dictionary, mapas_colision: Array):
+	var bloques_a_mover = []
+	
+	# 1. RASTREAR LA CADENA: Recopilamos todos los bloques flotantes
 	for x in columnas_afectadas:
 		var y_inicio = y_max_global
 		while not celdas_borradas.has(Vector2i(x, y_inicio)) and y_inicio > y_max_global - 50:
 			y_inicio -= 1
 			
 		var y = y_inicio - 1
-		var bloques_a_mover = []
-		
-		# 1. RASTREAR LA CADENA: Recolectamos todos los bloques que estaban apoyados en la explosión
 		while true:
 			var celda = Vector2i(x, y)
 			if celdas_borradas.has(celda):
@@ -118,39 +117,57 @@ func aplicar_gravedad_aislada(capa: TileMapLayer, columnas_afectadas: Array, y_m
 				
 			var source_id = capa.get_cell_source_id(celda)
 			if source_id != -1:
-				bloques_a_mover.append(celda)
+				if not celda in bloques_a_mover:
+					bloques_a_mover.append(celda)
 				y -= 1
 			else:
-				# Si tocamos aire, rompemos la cadena. ¡Las piezas flotantes lejanas están a salvo!
 				break
 				
-		# 2. CAÍDA LIBRE: Soltamos los bloques recolectados para que caigan al vacío
-		for celda_origen in bloques_a_mover:
-			var source_id = capa.get_cell_source_id(celda_origen)
-			var atlas = capa.get_cell_atlas_coords(celda_origen)
+	# 2. BUCLE DE ANIMACIÓN
+	var cayendo = true
+	while cayendo:
+		cayendo = false
+		
+		# Ordenamos los bloques de abajo hacia arriba (Para que caigan los de abajo primero y abran paso)
+		bloques_a_mover.sort_custom(func(a, b): return a.y > b.y)
+		var nuevos_bloques = []
+		
+		for celda in bloques_a_mover:
+			var celda_abajo = Vector2i(celda.x, celda.y + 1)
+			var source_id = capa.get_cell_source_id(celda)
 			
-			# Lo borramos un milisegundo para que no estorbe su propia caída
-			capa.set_cell(celda_origen, -1)
-			
-			var celda_destino = celda_origen
-			# Mientras la celda de abajo esté libre de piezas y de cueva, sigue cayendo
-			while es_celda_libre(Vector2i(celda_destino.x, celda_destino.y + 1), capa, mapas_colision) and celda_destino.y < celda_origen.y + 100:
-				celda_destino.y += 1
+			# Si el bloque sigue existiendo, el camino hacia abajo está libre, y no se ha caído al infinito
+			if source_id != -1 and es_celda_libre(celda_abajo, capa, mapas_colision) and celda.y < y_max_global + 100:
+				var atlas = capa.get_cell_atlas_coords(celda)
 				
-			capa.set_cell(celda_destino, source_id, atlas)
-			
-			# 3. Actualizamos la memoria para que sigan siendo seleccionables (Si no perdieron piezas)
-			if celda_destino != celda_origen:
-				if celda_origen in celda_a_pieza:
-					var id_p = celda_a_pieza[celda_origen]
-					celda_a_pieza.erase(celda_origen)
-					celda_a_pieza[celda_destino] = id_p
+				# Lo movemos un solo cuadro hacia abajo
+				capa.set_cell(celda, -1)
+				capa.set_cell(celda_abajo, source_id, atlas)
+				
+				# Actualizamos su memoria para que la pieza siga unida
+				if celda in celda_a_pieza:
+					var id_p = celda_a_pieza[celda]
+					celda_a_pieza.erase(celda)
+					celda_a_pieza[celda_abajo] = id_p
 					
 					if id_p in registro_piezas:
 						var celdas_p = registro_piezas[id_p]["celdas"]
-						var idx = celdas_p.find(celda_origen)
+						var idx = celdas_p.find(celda)
 						if idx != -1:
-							celdas_p[idx] = celda_destino
+							celdas_p[idx] = celda_abajo
+				
+				nuevos_bloques.append(celda_abajo)
+				cayendo = true # Como algo se movió, repetiremos el bucle
+			else:
+				# Chocó con algo, ya no se mueve y se queda en su posición final
+				nuevos_bloques.append(celda)
+				
+		bloques_a_mover = nuevos_bloques
+		
+		# 3. LA PAUSA VISUAL (Magia de Godot)
+		if cayendo:
+			# Esperamos 0.05 segundos antes de que bajen el siguiente cuadro
+			await get_tree().create_timer(0.05).timeout
 
 func intentar_recuperar_pieza(celda: Vector2i) -> CharacterBody2D:
 	if not celda_a_pieza.has(celda): return null

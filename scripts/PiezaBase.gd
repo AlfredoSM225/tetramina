@@ -53,6 +53,31 @@ func activar_control(jugador: CharacterBody2D) -> void:
 	jugador_ref = jugador
 	add_collision_exception_with(jugador)
 	
+	# === EL TRUCO: ROBAR LA CÁMARA ===
+	var camara = jugador.get_node_or_null("Camera2D")
+	if camara:
+		camara.reparent(self)
+		camara.position = Vector2.ZERO 
+	
+	if tile_map_layer:
+		for hijo in get_children():
+			if hijo is CollisionShape2D or hijo is Node2D:
+				var pos_local = tile_map_layer.to_local(hijo.global_position)
+				
+				var celda_x = round((pos_local.x - grid_size / 2.0) / grid_size)
+				var celda_y = round((pos_local.y - grid_size / 2.0) / grid_size)
+				var celda_exacta = Vector2i(celda_x, celda_y)
+				
+				var centro_celda = tile_map_layer.map_to_local(celda_exacta)
+				var centro_global = tile_map_layer.to_global(centro_celda)
+				
+				global_position = centro_global - hijo.position.rotated(rotation)
+				break
+	esta_activa = true
+	en_caida_libre = false
+	jugador_ref = jugador
+	add_collision_exception_with(jugador)
+	
 	# === EL SECRETO 1: ALINEACIÓN ABSOLUTA AL TILEMAP ===
 	if tile_map_layer:
 		for hijo in get_children():
@@ -98,7 +123,7 @@ func intentar_rotar() -> void:
 func soltar_pieza() -> void:
 	esta_activa = false
 	en_caida_libre = true 
-	
+	devolver_camara()
 	if jugador_ref:
 		remove_collision_exception_with(jugador_ref)
 		jugador_ref.recuperar_control()
@@ -137,3 +162,11 @@ func fijar_en_mapa() -> void:
 		get_node("/root/ScriptGlobal").revisar_lineas_completas()
 	
 	queue_free()
+	
+func devolver_camara() -> void:
+	var camara = get_node_or_null("Camera2D")
+	if camara and jugador_ref:
+		# Le regresamos la cámara al jugador
+		camara.reparent(jugador_ref)
+		# La centramos de nuevo en el cuerpo del jugador
+		camara.position = Vector2.ZERO
