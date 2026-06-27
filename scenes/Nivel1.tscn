@@ -4055,7 +4055,7 @@ tile_map_data = PackedByteArray("AAAAABwAAAAVABcAAAAAAB0AAAAVABgAAAABABwAAAAWABc
 tile_set = SubResource("TileSet_liwgf")
 
 [node name="Player" parent="." unique_id=846297350 instance=ExtResource("6_al5x1")]
-position = Vector2(1632, 384)
+position = Vector2(2080, 352)
 
 [node name="PiezasTetris" type="Node2D" parent="." unique_id=1471653679]
 
@@ -4136,7 +4136,7 @@ position = Vector2(3508, 533)
 shape = SubResource("RectangleShape2D_c64hm")
 
 [node name="Button_Floor" parent="." unique_id=757553749 node_paths=PackedStringArray("puerta_objetivo") instance=ExtResource("24_6cevo")]
-position = Vector2(2016, 434)
+position = Vector2(2016, 448)
 puerta_objetivo = NodePath("../Puerta")
 
 [node name="Monedas" type="Node2D" parent="." unique_id=777389538]

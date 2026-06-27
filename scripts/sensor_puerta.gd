@@ -1,7 +1,7 @@
 extends Area2D
 
 # Arrastra la puerta desde el árbol de escenas hacia esta propiedad en el Inspector
-@export var puerta_a_controlar: Puerta 
+@export var puerta_a_controlar: PuertaSensor
 
 func _ready() -> void:
 	# Conectamos la señal de detección de cuerpos

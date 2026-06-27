@@ -1,5 +1,5 @@
 extends StaticBody2D
-class_name Puerta
+class_name PuertaSensor
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
