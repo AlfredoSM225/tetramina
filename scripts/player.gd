@@ -91,7 +91,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Salto del jugador
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
+	if Input.is_action_just_pressed("Jump"):
 		velocity.y = JUMP_VELOCITY
 
 	# Movimiento horizontal y lógica de animaciones combinada

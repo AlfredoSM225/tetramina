@@ -1,8 +1,9 @@
 [gd_scene format=4 uid="uid://bxo6msxl75awf"]
 
 [ext_resource type="Texture2D" uid="uid://c68d0voatw5ml" path="res://sprites/Trono.png" id="1_3kelo"]
-[ext_resource type="Texture2D" uid="uid://dhkso3tbwfvcu" path="res://sprites/Die Chibi8.png" id="4_87xua"]
+[ext_resource type="Texture2D" uid="uid://cjgiojfcg72aq" path="res://sprites/decoracion.png" id="4_t2qkj"]
 [ext_resource type="Texture2D" uid="uid://u85dbhxwx2b6" path="res://sprites/mainlev_build.png" id="5_0sf5j"]
+[ext_resource type="Texture2D" uid="uid://cp3nhdhcfx636" path="res://sprites/FondoDecoracion.png" id="5_lw3mk"]
 [ext_resource type="PackedScene" uid="uid://bfdws24cvl7eh" path="res://scenes/antorcha.tscn" id="6_3suop"]
 [ext_resource type="Texture2D" uid="uid://6sbugp44l5qu" path="res://sprites/Dungeon Tile Set.png" id="6_oj1m6"]
 [ext_resource type="Texture2D" uid="uid://dno731p6mw3e7" path="res://sprites/main_lev_build2.png" id="7_brvly"]
@@ -18363,11 +18364,17 @@ texture = ExtResource("1_3kelo")
 tile_set = SubResource("TileSet_tglsu")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=517725931]
+[node name="DecoracionTetris" type="Sprite2D" parent="." unique_id=517725931]
 texture_filter = 1
 position = Vector2(512, 384)
-scale = Vector2(4, 5.333)
-texture = ExtResource("4_87xua")
+scale = Vector2(2, 2)
+texture = ExtResource("4_t2qkj")
+
+[node name="DecoracionTetris2" type="Sprite2D" parent="." unique_id=1030930990]
+texture_filter = 1
+position = Vector2(624.00006, 112.00001)
+scale = Vector2(5.5, 2.5)
+texture = ExtResource("5_lw3mk")
 
 [node name="Castillo Atras" type="TileMapLayer" parent="." unique_id=389777047]
 texture_filter = 1

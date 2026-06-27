@@ -14,12 +14,12 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	# Si entra el jugador, desvanecemos el muro (opacidad a 0.0)
-	if body.is_in_group("jugador"):
+	if body.is_in_group("Player"):
 		transicionar_muro(0.0)
 
 func _on_body_exited(body: Node2D) -> void:
 	# Si sale el jugador, volvemos a mostrar el muro (opacidad a 1.0)
-	if body.is_in_group("jugador"):
+	if body.is_in_group("Player"):
 		transicionar_muro(1.0)
 
 func transicionar_muro(target_alpha: float) -> void:
