@@ -8,6 +8,7 @@ class_name PiezaBase
 @export var id_tileset: int = 1 
 @export var tile_map_layer: TileMapLayer 
 
+
 var esta_activa: bool = false 
 var en_caida_libre: bool = false
 var jugador_ref: CharacterBody2D = null 
@@ -27,6 +28,7 @@ func _ready() -> void:
 		if anim_sprite:
 			anim_sprite.animation = color_pieza
 			anim_sprite.frame = 0
+		
 
 func _physics_process(delta: float) -> void:
 	if not esta_activa:
@@ -38,9 +40,7 @@ func _physics_process(delta: float) -> void:
 			
 		velocity.x = 0
 		
-		# 2. EL SECRETO: Ejecutar move_and_slide PRIMERO.
-		# Esto obliga a Godot a moverse un milímetro, recalcular todo y darse cuenta
-		# de que la pieza está en el aire flotando.
+
 		move_and_slide()
 		
 		# 3. AHORA SÍ comprobamos si realmente acaba de chocar contra el suelo
@@ -52,6 +52,8 @@ func activar_control(jugador: CharacterBody2D) -> void:
 	en_caida_libre = false
 	jugador_ref = jugador
 	add_collision_exception_with(jugador)
+	set_shader_seleccionable(false)
+	set_shader_en_uso(true)
 	
 	# === EL TRUCO: ROBAR LA CÁMARA ===
 	var camara = jugador.get_node_or_null("Camera2D")
@@ -127,7 +129,7 @@ func soltar_pieza() -> void:
 	if jugador_ref:
 		remove_collision_exception_with(jugador_ref)
 		jugador_ref.recuperar_control()
-
+	set_shader_en_uso(false)
 
 func fijar_en_mapa() -> void:
 	en_caida_libre = false
@@ -170,3 +172,14 @@ func devolver_camara() -> void:
 		camara.reparent(jugador_ref)
 		# La centramos de nuevo en el cuerpo del jugador
 		camara.position = Vector2.ZERO
+
+func set_shader_seleccionable(activar: bool) -> void:
+	var color_rects = find_children("*", "ColorRect", true, false)
+	for rect in color_rects:
+		rect.visible = activar
+
+func set_shader_en_uso(activar: bool) -> void:
+	var sprites = find_children("*", "AnimatedSprite2D", true, false)
+	for sprite in sprites:
+		if sprite.material:
+			sprite.material.set_shader_parameter("activado", activar)

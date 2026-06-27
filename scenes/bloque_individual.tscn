@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://utmjj82qqb83"]
 
 [ext_resource type="Texture2D" uid="uid://de8ka5yhq4lv0" path="res://sprites/bloque_amarillo.png" id="1_buaj3"]
+[ext_resource type="Shader" uid="uid://p463cy1brooy" path="res://Shaders/Parpadeo.gdshader" id="1_opgb8"]
+[ext_resource type="Shader" uid="uid://b34cl8t1w74h0" path="res://Shaders/Blink.gdshader" id="1_yd1me"]
 [ext_resource type="Texture2D" uid="uid://d2u5ir0evohqn" path="res://sprites/bloque_aqua.png" id="2_dgkvy"]
 [ext_resource type="Texture2D" uid="uid://bbfgqbokgjf0r" path="res://sprites/bloque_azul.png" id="3_yd1me"]
 [ext_resource type="Texture2D" uid="uid://m5tqe3ctofiq" path="res://sprites/bloque_morado.png" id="4_opgb8"]
@@ -10,6 +12,13 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgkvy"]
 size = Vector2(30, 30)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iy1pu"]
+resource_local_to_scene = true
+shader = ExtResource("1_opgb8")
+shader_parameter/activado = false
+shader_parameter/velocidad_parpadeo = 5.0
+shader_parameter/opacidad_minima = 0.3
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o5qks"]
 animations = [{
@@ -70,9 +79,30 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yd1me"]
+shader = ExtResource("1_yd1me")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.09
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
+
 [node name="BloqueIndividual" type="CollisionShape2D" unique_id=1159988353]
 shape = SubResource("RectangleShape2D_dgkvy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1581630823]
+material = SubResource("ShaderMaterial_iy1pu")
 sprite_frames = SubResource("SpriteFrames_o5qks")
-animation = &"Naranja"
+animation = &"Amarillo"
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D" unique_id=534745548]
+material = SubResource("ShaderMaterial_yd1me")
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
