@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bfdws24cvl7eh"]
+
+[ext_resource type="Texture2D" uid="uid://drdmr8mwxylkl" path="res://sprites/torch-C-01.png" id="1_05rqt"]
+[ext_resource type="Texture2D" uid="uid://s50ij4keixw8" path="res://sprites/torch-C-02.png" id="2_8u55w"]
+[ext_resource type="Texture2D" uid="uid://ixhlfhsand3p" path="res://sprites/torch-C-03.png" id="3_qlsen"]
+[ext_resource type="Texture2D" uid="uid://dc4x4y04dx5d8" path="res://sprites/torch-C-04.png" id="4_1fkne"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1lf24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_05rqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8u55w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qlsen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1fkne")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Antorcha" type="Area2D" unique_id=457629830]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1365828278]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_1lf24")
+frame_progress = 0.30584615

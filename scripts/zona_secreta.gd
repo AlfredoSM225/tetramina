@@ -1,7 +1,7 @@
 extends Area2D
 
 # Arrastra aquí tu nodo de bloques secretos desde el árbol de escenas si el nombre cambia
-@onready var capa_secreta: TileMapLayer = $"../Tile frente/TileMapLayer_Secretos"
+@onready var capa_secreta: TileMapLayer = $"../Tile frente/TileMapLayer_Secretos2"
 
 var ya_descubierto: bool = false
 
