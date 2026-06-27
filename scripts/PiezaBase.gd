@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name PiezaBase
 
+@export var ruta_escena: String = ""
 @export var puede_rotar: bool = true
 @export var grid_size: int = 32 
 @export_enum("Rojo", "Azul", "Verde", "Morado", "Amarillo", "Naranja", "Aqua") var color_pieza: String = "Rojo"
@@ -51,7 +52,24 @@ func activar_control(jugador: CharacterBody2D) -> void:
 	en_caida_libre = false
 	jugador_ref = jugador
 	add_collision_exception_with(jugador)
-
+	
+	# === EL SECRETO 1: ALINEACIÓN ABSOLUTA AL TILEMAP ===
+	if tile_map_layer:
+		for hijo in get_children():
+			if hijo is CollisionShape2D or hijo is Node2D:
+				# 1. Vemos en qué celda está tocando este bloque
+				var pos_local = tile_map_layer.to_local(hijo.global_position)
+				var celda = tile_map_layer.local_to_map(pos_local)
+				
+				# 2. Le pedimos al TileMap el centro matemático PERFECTO de esa celda
+				var centro_celda = tile_map_layer.map_to_local(celda)
+				var centro_global = tile_map_layer.to_global(centro_celda)
+				
+				# 3. Anclamos toda la pieza para que el bloque quede en ese centro exacto
+				global_position = centro_global - hijo.position.rotated(rotation)
+				break # Solo necesitamos hacerlo con el primer bloque
+				
+				
 func _unhandled_input(event: InputEvent) -> void:
 	if not esta_activa:
 		return
@@ -85,26 +103,35 @@ func soltar_pieza() -> void:
 		remove_collision_exception_with(jugador_ref)
 		jugador_ref.recuperar_control()
 
+
 func fijar_en_mapa() -> void:
 	en_caida_libre = false
-	if not tile_map_layer: 
-		print("ERROR: No hay CapaPiezas asignada")
-		return
+	if not tile_map_layer: return
 
-	var bloques_pintados = 0
+	var celdas_registradas = []
+	var offset_root_perfecto = Vector2.ZERO
+	var tiene_primer_hijo = false
 
 	for hijo in get_children():
-		# Ya no buscamos el nombre del sprite, simplemente pintamos 
-		# todo hijo que tenga colisión (tus 4 cuadritos)
 		if hijo is CollisionShape2D or hijo is Node2D:
-			var pos_local_al_mapa = tile_map_layer.to_local(hijo.global_position)
-			var coord_rejilla = tile_map_layer.local_to_map(pos_local_al_mapa)
+			# Usamos la posición directa. local_to_map ya es suficientemente inteligente
+			# para saber en qué celda cayó sin necesidad de que nosotros redondeemos nada.
+			var pos_local = tile_map_layer.to_local(hijo.global_position)
+			var coord_rejilla = tile_map_layer.local_to_map(pos_local)
 			
 			tile_map_layer.set_cell(coord_rejilla, id_tileset, Vector2i(0, 0))
-			bloques_pintados += 1
+			celdas_registradas.append(coord_rejilla)
+			
+			if not tiene_primer_hijo:
+				# === EL SECRETO 2: DISTANCIA PURA ===
+				# En vez de restar posiciones globales afectadas por la caída, usamos 
+				# la posición local perfecta del nodo interno.
+				offset_root_perfecto = -hijo.position.rotated(rotation)
+				tiene_primer_hijo = true
 	
-	# === EL CHIVATO (Revisa la consola abajo en Godot) ===
-	print("Se pintaron ", bloques_pintados, " bloques en el mapa con el ID: ", id_tileset)
+	if celdas_registradas.size() == 4 and ruta_escena != "":
+		var id_unico = Time.get_ticks_msec() + randi()
+		ScriptGlobal.registrar_pieza(id_unico, ruta_escena, celdas_registradas, id_tileset, offset_root_perfecto, rotation)
 	
 	if has_node("/root/ScriptGlobal"):
 		get_node("/root/ScriptGlobal").revisar_lineas_completas()

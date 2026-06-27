@@ -24,6 +24,10 @@ GameManager="*uid://k00qdhd41mwv"
 window/size/viewport_width=960
 window/size/viewport_height=480
 
+[global_group]
+
+CapaPiezas=""
+
 [input]
 
 Left={

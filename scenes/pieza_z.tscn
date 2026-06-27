@@ -6,6 +6,7 @@
 [node name="PiezaZ" type="CharacterBody2D" unique_id=2111717301]
 texture_filter = 1
 script = ExtResource("1_lb0q2")
+ruta_escena = "res://scenes/pieza_z.tscn"
 id_tileset = 6
 
 [node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_mein4")]

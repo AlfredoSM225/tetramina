@@ -6,6 +6,7 @@
 [node name="PiezaL" type="CharacterBody2D" unique_id=2111717301]
 texture_filter = 1
 script = ExtResource("1_gu44c")
+ruta_escena = "res://scenes/pieza_L.tscn"
 color_pieza = "Naranja"
 id_tileset = 4
 

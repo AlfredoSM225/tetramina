@@ -6,6 +6,7 @@
 [node name="PiezaT" type="CharacterBody2D" unique_id=2111717301]
 texture_filter = 1
 script = ExtResource("1_c5v6g")
+ruta_escena = "res://scenes/pieza_t.tscn"
 color_pieza = "Morado"
 id_tileset = 3
 

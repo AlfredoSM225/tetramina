@@ -2989,54 +2989,70 @@ sources/0 = SubResource("TileSetScenesCollectionSource_6ddix")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78ob3"]
 texture = ExtResource("11_ql5k6")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cevo"]
 texture = ExtResource("12_c64hm")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ddix"]
 texture = ExtResource("13_1mo0l")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsk1d"]
 texture = ExtResource("14_wrv56")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1q7tt"]
 texture = ExtResource("15_1dxen")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gqvh0"]
 texture = ExtResource("16_oed2h")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f2o1r"]
 texture = ExtResource("17_uaxme")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_vjqsj"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_78ob3")
 sources/1 = SubResource("TileSetAtlasSource_6cevo")
 sources/2 = SubResource("TileSetAtlasSource_6ddix")
@@ -3996,7 +4012,7 @@ repeat_size = Vector2(960, 0)
 repeat_times = 6
 
 [node name="Fondo3" type="Sprite2D" parent="Fondo/Parallax2D3" unique_id=1800321693]
-position = Vector2(2790, 0)
+position = Vector2(2821, -1)
 texture = ExtResource("3_al5x1")
 centered = false
 
@@ -4039,38 +4055,38 @@ tile_map_data = PackedByteArray("AAAAABwAAAAVABcAAAAAAB0AAAAVABgAAAABABwAAAAWABc
 tile_set = SubResource("TileSet_liwgf")
 
 [node name="Player" parent="." unique_id=846297350 instance=ExtResource("6_al5x1")]
-position = Vector2(3928, 16)
+position = Vector2(1632, 384)
 
 [node name="PiezasTetris" type="Node2D" parent="." unique_id=1471653679]
 
 [node name="PiezaT" parent="PiezasTetris" unique_id=2066233201 node_paths=PackedStringArray("tile_map_layer") instance=ExtResource("10_nnl18")]
-position = Vector2(535, 405)
+position = Vector2(1536, 320)
 tile_map_layer = NodePath("../../TilePiezas")
 
 [node name="PiezaT2" parent="PiezasTetris" unique_id=2109080692 instance=ExtResource("10_nnl18")]
-position = Vector2(3615, 1375)
+position = Vector2(3616, 1376)
 
 [node name="Piezai3" parent="PiezasTetris" unique_id=1990937726 instance=ExtResource("9_n60y6")]
-position = Vector2(2574, 1130)
+position = Vector2(2560, 1120)
 rotation = -1.5707964
 
 [node name="PiezaO" parent="PiezasTetris" unique_id=2111717301 instance=ExtResource("11_oed2h")]
-position = Vector2(-698, 394)
+position = Vector2(-672, 384)
 
 [node name="Piezai" parent="PiezasTetris" unique_id=364606492 node_paths=PackedStringArray("tile_map_layer") instance=ExtResource("9_n60y6")]
-position = Vector2(1772, 211)
+position = Vector2(1792, 224)
 rotation = 1.5707964
 tile_map_layer = NodePath("../../TilePiezas")
 
 [node name="TilePiezasNoMovibles" type="TileMapLayer" parent="." unique_id=649811858]
 position = Vector2(2744, 437)
 rotation = -1.5707964
-tile_map_data = PackedByteArray("AAD+//j/AAAAAAAAATD+/wQAAAAAAAAAAzDi/x4AAAAAAAAAATARANb/AAAAAAAAAQATANL/AAAAAAAABWATANr/AAAAAAAAB1A=")
 tile_set = SubResource("TileSet_xsk1d")
 
-[node name="TilePiezas" type="TileMapLayer" parent="." unique_id=1041376204]
-position = Vector2(2735, 418)
-rotation = -1.5707964
+[node name="TilePiezas" type="TileMapLayer" parent="." unique_id=1041376204 groups=["CapaPiezas"]]
+texture_filter = 1
+position = Vector2(2944, 352)
+tile_map_data = PackedByteArray("AADo//n/BQAAAAAAAADn//n/BQAAAAAAAADn//j/BQAAAAAAAADm//j/BQAAAAAAAADm//n/AQAAAAAAAADl//n/AQAAAAAAAADk//n/AQAAAAAAAADj//n/AQAAAAAAAADj//j/BgAAAAAAAADi//j/BgAAAAAAAADi//n/BgAAAAAAAADh//n/BgAAAAAAAAD0/wMAAQAAAAAAAAD1/wMAAQAAAAAAAAD2/wMAAQAAAAAAAAD3/wMAAQAAAAAAAAD9/wMAAgAAAAAAAAD8/wMAAgAAAAAAAAD7/wMAAgAAAAAAAAD7/wIAAgAAAAAAAAAHABEAAQAAAAAAAAAIABEAAQAAAAAAAAAJABEAAQAAAAAAAAAKABEAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_vjqsj")
 
 [node name="Tile frente" type="Node2D" parent="." unique_id=130192609]
