@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 
 ScriptGlobal="*uid://bdjgtnxld8ht7"
 GameManager="*uid://k00qdhd41mwv"
+WorldState="*uid://cug5gb2rkrlbl"
+PlayerState="*uid://cy0c81vmyoxo3"
 
 [display]
 
@@ -68,6 +70,11 @@ colocar_pieza={
 Jump={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
+]
+}
+reiniciar_checkpoint={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":75,"key_label":0,"unicode":107,"location":0,"echo":false,"script":null)
 ]
 }
 

@@ -17,9 +17,21 @@ var esta_en_escalera: bool = false
 var escalando: bool = false
 
 func _ready() -> void:
-	add_to_group("jugador")
+	# Añadimos al grupo "Player" para los sistemas globales
+	add_to_group("Player")
+	
+	# Si ya existía una posición guardada al iniciar la escena, aparecer ahí
+	var current_scene_path := get_tree().current_scene.scene_file_path
+	if PlayerState.has_position(current_scene_path):
+		global_position = PlayerState.get_position(current_scene_path)
 
 func _physics_process(delta):
+	# --- ESCUCHAR LA TECLA K PARA REINICIAR EL MUNDO ---
+	# Recuerda mapear "reiniciar_mundo" en los Ajustes del Proyecto a la tecla K
+	if Input.is_action_just_pressed("reiniciar_checkpoint"):
+		reiniciar_a_checkpoint(true) # True = Regresa piezas y monedas a su lugar
+		return
+
 	# === MODO TELEQUINESIS (Jugador IDLE) ===
 	if pieza_controlada != null:
 		# Si activaste el poder en el aire, el personaje debe caer al suelo
@@ -60,7 +72,7 @@ func _physics_process(delta):
 			# Forzamos una velocidad casi nula pero estable para que no fluctúe en los bordes
 			velocity.y = 0
 			
-		# Permite saltar en cualquier dirección estando en la escalera
+		# Permite lanzar un salto desde la escalera
 		if Input.is_action_just_pressed("Jump"):
 			escalando = false
 			velocity.y = JUMP_VELOCITY
@@ -151,3 +163,35 @@ func set_en_escalera(valor: bool) -> void:
 	esta_en_escalera = valor
 	if not valor and velocity.y == 0:
 		escalando = false
+
+# --- FUNCIONES NUEVAS PARA EL SISTEMA DE CHECKPOINTS ---
+
+# Esta función se llama si caes en pinchos o mueres
+func morir() -> void:
+	# Al morir el mundo NO cambia (False), solo reaparecemos
+	reiniciar_a_checkpoint(false)
+
+func reiniciar_a_checkpoint(restaurar_mundo: bool) -> void:
+	var current_scene_path := get_tree().current_scene.scene_file_path
+	
+	# Si estuvieras controlando una pieza al morir/resetear, liberamos el control
+	if pieza_controlada != null:
+		if pieza_controlada.has_method("desactivar_control"):
+			pieza_controlada.desactivar_control()
+		pieza_controlada = null
+	
+	if PlayerState.has_position(current_scene_path):
+		# Reaparecer en las coordenadas exactas del checkpoint activo
+		global_position = PlayerState.get_position(current_scene_path)
+		
+		# Si se presionó K, ordenamos a las piezas que vuelvan a su posición
+		if restaurar_mundo:
+			get_tree().call_group("Reseteables", "cargar_estado_de_checkpoint")
+	else:
+		# Si no ha tocado ningún checkpoint en este nivel, reinicia el nivel por completo
+		get_tree().reload_current_scene()
+		return
+
+	# Resetear dinámicas de movimiento físicas para no aparecer con impulsos raros
+	escalando = false
+	velocity = Vector2.ZERO

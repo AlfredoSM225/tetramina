@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bjp0dy8qqme3y"]
+
+[ext_resource type="Script" uid="uid://bi0tgbq8icltv" path="res://scripts/Checkpoint.gd" id="1_55jpe"]
+[ext_resource type="Texture2D" uid="uid://b81q5nwtkv2gf" path="res://sprites/torch-C-apagada-01.png" id="2_vc08m"]
+[ext_resource type="Texture2D" uid="uid://drdmr8mwxylkl" path="res://sprites/torch-C-01.png" id="3_tl56q"]
+[ext_resource type="Texture2D" uid="uid://s50ij4keixw8" path="res://sprites/torch-C-02.png" id="4_ok2sx"]
+[ext_resource type="Texture2D" uid="uid://ixhlfhsand3p" path="res://sprites/torch-C-03.png" id="5_j0vas"]
+[ext_resource type="Texture2D" uid="uid://dc4x4y04dx5d8" path="res://sprites/torch-C-04.png" id="6_fndcu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e28ry"]
+size = Vector2(20, 213)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ejce6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vc08m")
+}],
+"loop": true,
+"name": &"apagada",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tl56q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ok2sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_j0vas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fndcu")
+}],
+"loop": true,
+"name": &"encendida",
+"speed": 5.0
+}]
+
+[node name="Checkpoint" type="Area2D" unique_id=1302159929]
+script = ExtResource("1_55jpe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=329889197]
+position = Vector2(0, -91.5)
+shape = SubResource("RectangleShape2D_e28ry")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1546189047]
+texture_filter = 1
+position = Vector2(1, -18)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ejce6")
+animation = &"encendida"
+frame_progress = 0.30860633
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

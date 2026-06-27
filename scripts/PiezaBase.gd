@@ -14,8 +14,15 @@ var en_caida_libre: bool = false
 var jugador_ref: CharacterBody2D = null 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# --- VARIABLES PARA EL CHECKPOINT ---
+@onready var id_unico = "pieza_" + str(global_position.x) + "_" + str(global_position.y)
+var scene_path : String
+
 func _ready() -> void:
 	add_to_group("Piezas")
+	# Añadimos al grupo global reseteable para el sistema de checkpoints
+	add_to_group("Reseteables")
+	scene_path = get_tree().current_scene.scene_file_path
 	
 	var mapa_encontrado = get_tree().get_first_node_in_group("CapaPiezas")
 	if mapa_encontrado is TileMapLayer:
@@ -141,8 +148,6 @@ func fijar_en_mapa() -> void:
 
 	for hijo in get_children():
 		if hijo is CollisionShape2D or hijo is Node2D:
-			# Usamos la posición directa. local_to_map ya es suficientemente inteligente
-			# para saber en qué celda cayó sin necesidad de que nosotros redondeemos nada.
 			var pos_local = tile_map_layer.to_local(hijo.global_position)
 			var coord_rejilla = tile_map_layer.local_to_map(pos_local)
 			
@@ -150,15 +155,12 @@ func fijar_en_mapa() -> void:
 			celdas_registradas.append(coord_rejilla)
 			
 			if not tiene_primer_hijo:
-				# === EL SECRETO 2: DISTANCIA PURA ===
-				# En vez de restar posiciones globales afectadas por la caída, usamos 
-				# la posición local perfecta del nodo interno.
 				offset_root_perfecto = -hijo.position.rotated(rotation)
 				tiene_primer_hijo = true
 	
 	if celdas_registradas.size() == 4 and ruta_escena != "":
-		var id_unico = Time.get_ticks_msec() + randi()
-		ScriptGlobal.registrar_pieza(id_unico, ruta_escena, celdas_registradas, id_tileset, offset_root_perfecto, rotation)
+		var id_unico_guardado = Time.get_ticks_msec() + randi()
+		ScriptGlobal.registrar_pieza(id_unico_guardado, ruta_escena, celdas_registradas, id_tileset, offset_root_perfecto, rotation)
 	
 	if has_node("/root/ScriptGlobal"):
 		get_node("/root/ScriptGlobal").revisar_lineas_completas()
@@ -168,9 +170,7 @@ func fijar_en_mapa() -> void:
 func devolver_camara() -> void:
 	var camara = get_node_or_null("Camera2D")
 	if camara and jugador_ref:
-		# Le regresamos la cámara al jugador
 		camara.reparent(jugador_ref)
-		# La centramos de nuevo en el cuerpo del jugador
 		camara.position = Vector2.ZERO
 
 func set_shader_seleccionable(activar: bool) -> void:
@@ -183,3 +183,44 @@ func set_shader_en_uso(activar: bool) -> void:
 	for sprite in sprites:
 		if sprite.material:
 			sprite.material.set_shader_parameter("activado", activar)
+
+# --- FUNCIONES NUEVAS DEL SISTEMA DE CHECKPOINTS ---
+
+# Se llama automáticamente cuando el jugador pisa un Checkpoint
+func guardar_estado_en_checkpoint() -> void:
+	WorldState.set_state(scene_path, id_unico, "pos_x", global_position.x)
+	WorldState.set_state(scene_path, id_unico, "pos_y", global_position.y)
+	WorldState.set_state(scene_path, id_unico, "rotacion", rotation)
+	WorldState.set_state(scene_path, id_unico, "existe", true)
+
+# Se llama automáticamente cuando el jugador presiona K
+func cargar_estado_de_checkpoint() -> void:
+	if not WorldState.scene_states.has(scene_path):
+		return
+		
+	var guardado_existe = WorldState.get_state(scene_path, id_unico, "existe", false)
+	
+	if guardado_existe:
+		# Si el jugador la estaba controlando en pleno reseteo, devolvemos la cámara de forma segura
+		if esta_activa:
+			desactivar_control()
+			
+		var px = WorldState.get_state(scene_path, id_unico, "pos_x", global_position.x)
+		var py = WorldState.get_state(scene_path, id_unico, "pos_y", global_position.y)
+		var rot = WorldState.get_state(scene_path, id_unico, "rotacion", rotation)
+		
+		global_position = Vector2(px, py)
+		rotation = rot
+		
+		# Detenemos cualquier inercia de caída libre que trajera la pieza
+		velocity = Vector2.ZERO
+		en_caida_libre = false
+
+# Fuerza la desconexión del control si el mundo se reinicia bruscamente
+func desactivar_control() -> void:
+	esta_activa = false
+	en_caida_libre = false
+	devolver_camara()
+	if jugador_ref:
+		remove_collision_exception_with(jugador_ref)
+	set_shader_en_uso(false)
