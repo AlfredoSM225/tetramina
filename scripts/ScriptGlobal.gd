@@ -1,6 +1,6 @@
 extends Node
 
-var bloques_para_linea = 9
+var bloques_para_linea = 8
 
 var registro_piezas = {} 
 var celda_a_pieza = {}   
