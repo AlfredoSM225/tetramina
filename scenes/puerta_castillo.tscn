@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bv54vcb8eyah2"]
+
+[ext_resource type="Script" uid="uid://cfjn6pk52ddkc" path="res://scripts/puerta_castillo.gd" id="1_vgajx"]
+[ext_resource type="Texture2D" uid="uid://dhjlcxxkxt715" path="res://sprites/Puerta abriendo.png" id="2_ok1te"]
+[ext_resource type="Texture2D" uid="uid://c00k8dwqlaw4p" path="res://sprites/Puerta abierta.png" id="3_e6b0b"]
+[ext_resource type="Texture2D" uid="uid://b6ycj4u3y7uo4" path="res://sprites/Puerta cerrada.png" id="4_8pw7t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8pkvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ok1te")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e6b0b")
+}],
+"loop": false,
+"name": &"abierta",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8pw7t")
+}],
+"loop": true,
+"name": &"cerrada",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rf0s0"]
+size = Vector2(64, 80)
+
+[node name="PuertaCastillo" type="Area2D" unique_id=1987415918]
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_vgajx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1564569600]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_8pkvu")
+animation = &"cerrada"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1195602236]
+texture_filter = 1
+shape = SubResource("RectangleShape2D_rf0s0")

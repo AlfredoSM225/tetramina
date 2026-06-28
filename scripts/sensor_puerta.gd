@@ -9,5 +9,5 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	# Si lo que pisó el sensor es el jugador y asignaste una puerta...
-	if body.is_in_group("jugador") and puerta_a_controlar != null:
+	if body.is_in_group("Player") and puerta_a_controlar != null:
 		puerta_a_controlar.activar_secuencia_puerta()

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://8igdujrqfreb"]
+
+[ext_resource type="Texture2D" uid="uid://dyskcmua80g31" path="res://sprites/ButtonCastillo_pressed.png" id="1_salna"]
+[ext_resource type="Script" uid="uid://bq56fh3g4kj2q" path="res://scripts/boton_antorcha.gd" id="1_yreij"]
+[ext_resource type="Texture2D" uid="uid://l6hqm7nwv78e" path="res://sprites/ButtonCastillo_unpressed.png" id="2_yreij"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8pfar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_salna")
+}],
+"loop": true,
+"name": &"A-Pressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yreij")
+}],
+"loop": true,
+"name": &"A-Unpressed",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wm5y"]
+size = Vector2(80, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkpdp"]
+size = Vector2(80, 21)
+
+[node name="BotonAntorcha" type="StaticBody2D" unique_id=1684563846]
+script = ExtResource("1_yreij")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1494011258]
+sprite_frames = SubResource("SpriteFrames_8pfar")
+animation = &"A-Unpressed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1046388808]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_8wm5y")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1394013317]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=416197024]
+position = Vector2(0, -21.5)
+shape = SubResource("RectangleShape2D_rkpdp")
+debug_color = Color(0.7761885, 0.14167872, 0.99999994, 0.41960785)

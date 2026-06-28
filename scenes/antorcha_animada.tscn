@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bbsuf78cv4j6g"]
+
+[ext_resource type="Texture2D" uid="uid://b3a81l8v8nu5j" path="res://sprites/torch-D-apagada-01.png" id="1_f0e3n"]
+[ext_resource type="Texture2D" uid="uid://cog12mf8ax7be" path="res://sprites/torch-D-01.png" id="2_aq2jc"]
+[ext_resource type="Texture2D" uid="uid://cqjlxc5ts8sop" path="res://sprites/torch-D-02.png" id="3_8aoud"]
+[ext_resource type="Texture2D" uid="uid://mmqb2gf0csfh" path="res://sprites/torch-D-03.png" id="4_5gcoh"]
+[ext_resource type="Texture2D" uid="uid://ciahec8e862bl" path="res://sprites/torch-D-04.png" id="5_4s3eu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0v1vc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f0e3n")
+}],
+"loop": true,
+"name": &"apagada",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aq2jc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8aoud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5gcoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4s3eu")
+}],
+"loop": true,
+"name": &"encendida",
+"speed": 5.0
+}]
+
+[node name="AntorchaAnimada" type="Node2D" unique_id=1293122301]
+texture_filter = 1
+scale = Vector2(3, 3)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1600755436]
+sprite_frames = SubResource("SpriteFrames_0v1vc")
+animation = &"apagada"
