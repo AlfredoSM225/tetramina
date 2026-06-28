@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bc18ft35es7q1" path="res://sprites/bloque_naranja.png" id="19_3huas"]
 [ext_resource type="Texture2D" uid="uid://coddt756jsanm" path="res://sprites/bloque_rojo.png" id="20_2f2ql"]
 [ext_resource type="Texture2D" uid="uid://chstqg5h68fo0" path="res://sprites/bloque_verde.png" id="21_aluwo"]
+[ext_resource type="PackedScene" uid="uid://cbyrwogeflatr" path="res://scenes/generador_de_piezas.tscn" id="21_lw3mk"]
 [ext_resource type="Script" uid="uid://wcqyd65bogp4" path="res://scripts/zona_secreta.gd" id="23_31qpd"]
 [ext_resource type="Script" uid="uid://djdnarwjs7r16" path="res://scripts/sensor_puerta.gd" id="27_ywm7u"]
 
@@ -9394,54 +9395,70 @@ sources/4 = SubResource("TileSetAtlasSource_k4bgj")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_78ob3"]
 texture = ExtResource("15_jpfob")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cevo"]
 texture = ExtResource("16_qha0v")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ddix"]
 texture = ExtResource("17_6hy12")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xsk1d"]
 texture = ExtResource("18_uci2x")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1q7tt"]
 texture = ExtResource("19_3huas")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gqvh0"]
 texture = ExtResource("20_2f2ql")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f2o1r"]
 texture = ExtResource("21_aluwo")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_vjqsj"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_78ob3")
 sources/1 = SubResource("TileSetAtlasSource_6cevo")
 sources/2 = SubResource("TileSetAtlasSource_6ddix")
@@ -18421,7 +18438,7 @@ position = Vector2(-128, 512)
 
 [node name="PiezasTetris" type="Node2D" parent="." unique_id=1471653679]
 
-[node name="TilePiezas" type="TileMapLayer" parent="." unique_id=1041376204]
+[node name="TilePiezas" type="TileMapLayer" parent="." unique_id=1041376204 groups=["CapaPiezas"]]
 tile_set = SubResource("TileSet_vjqsj")
 
 [node name="Tile frente" type="Node2D" parent="." unique_id=130192609]
@@ -18490,6 +18507,9 @@ limit_top = 0
 limit_right = 712
 limit_bottom = 600
 position_smoothing_enabled = true
+
+[node name="GeneradorDePiezas" parent="." unique_id=788842092 instance=ExtResource("21_lw3mk")]
+position = Vector2(96, 128)
 
 [connection signal="body_entered" from="ZonaSecreta" to="ZonaSecreta" method="_on_body_entered"]
 [connection signal="body_entered" from="CamaraJefe" to="CamaraJefe" method="_on_body_entered"]

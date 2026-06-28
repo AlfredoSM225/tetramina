@@ -8,6 +8,7 @@ texture_filter = 1
 script = ExtResource("1_gtslb")
 ruta_escena = "res://scenes/pieza_o.tscn"
 color_pieza = "Amarillo"
+id_tileset = 0
 
 [node name="BloqueIndividual" parent="." unique_id=825388252 instance=ExtResource("1_h7nk4")]
 position = Vector2(-16, 16)
