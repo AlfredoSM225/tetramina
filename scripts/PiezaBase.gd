@@ -47,8 +47,25 @@ func _physics_process(delta: float) -> void:
 			
 		velocity.x = 0
 		
-
+		# 2. Movemos la pieza y registramos las colisiones
 		move_and_slide()
+		
+		# === NUEVO: SISTEMA DE APLASTAMIENTO ===
+		if en_caida_libre:
+			for i in get_slide_collision_count():
+				var colision = get_slide_collision(i)
+				var cuerpo = colision.get_collider()
+				
+				# Revisamos si lo que acabamos de golpear es el Jugador
+				if cuerpo and cuerpo.is_in_group("Player"):
+					# get_normal() nos dice hacia dónde apunta la superficie chocada.
+					# Si la 'y' es negativa (apunta hacia arriba), golpeamos el techo del jugador (su cabeza)
+					if colision.get_normal().y < -0.5:
+						if cuerpo.has_method("morir"):
+							cuerpo.morir()
+							# Evitamos que la pieza se pinte en el TileMap sobre tu cadáver
+							en_caida_libre = false 
+						break # Ya lo mató, no necesitamos seguir revisando otros choques
 		
 		# 3. AHORA SÍ comprobamos si realmente acaba de chocar contra el suelo
 		if is_on_floor() and en_caida_libre:
