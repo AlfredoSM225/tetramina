@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bfdws24cvl7eh"]
 
 [ext_resource type="Texture2D" uid="uid://drdmr8mwxylkl" path="res://sprites/torch-C-01.png" id="1_05rqt"]
+[ext_resource type="Script" uid="uid://bcr8ffj75s050" path="res://scripts/antorcha.gd" id="1_8u55w"]
 [ext_resource type="Texture2D" uid="uid://s50ij4keixw8" path="res://sprites/torch-C-02.png" id="2_8u55w"]
 [ext_resource type="Texture2D" uid="uid://ixhlfhsand3p" path="res://sprites/torch-C-03.png" id="3_qlsen"]
 [ext_resource type="Texture2D" uid="uid://dc4x4y04dx5d8" path="res://sprites/torch-C-04.png" id="4_1fkne"]
@@ -26,6 +27,7 @@ animations = [{
 }]
 
 [node name="Antorcha" type="Area2D" unique_id=457629830]
+script = ExtResource("1_8u55w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1365828278]
 texture_filter = 1
