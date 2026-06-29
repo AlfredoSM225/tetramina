@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://wjok6mncs5nn"]
+
+[ext_resource type="FontFile" uid="uid://blsuaq43hp0m7" path="res://fonts/PixeloidSans-Bold.ttf" id="1_i85hu"]
+[ext_resource type="Script" uid="uid://tsaj7olrj4as" path="res://scripts/menu_principal.gd" id="1_mk4g1"]
+[ext_resource type="FontFile" uid="uid://c6eqbl3q5r32j" path="res://fonts/PixeloidSans.ttf" id="3_iep14"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_lf1kt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_486ty"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iep14"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5ui5"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qcl6i"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="MenuPrincipal" type="Control" unique_id=420563114]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mk4g1")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=204618072]
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 480.0
+texture = SubResource("CanvasTexture_lf1kt")
+
+[node name="Label" type="Label" parent="." unique_id=1118824116]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 32.0
+offset_right = 704.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("1_i85hu")
+theme_override_font_sizes/font_size = 54
+text = "TETRAMINA"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=569306509]
+layout_mode = 0
+offset_left = 352.0
+offset_right = 608.0
+offset_bottom = 480.0
+alignment = 1
+
+[node name="BotonNuevo" type="Button" parent="VBoxContainer" unique_id=1604689549]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_iep14")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_486ty")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Nueva Partida"
+
+[node name="BotonContinuar" type="Button" parent="VBoxContainer" unique_id=815980262]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_iep14")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_w5ui5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Continuar Partida"
+
+[node name="BotonSalir" type="Button" parent="VBoxContainer" unique_id=370215098]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_iep14")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_qcl6i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Salir"
+
+[connection signal="pressed" from="VBoxContainer/BotonNuevo" to="." method="_on_boton_nuevo_pressed"]
+[connection signal="pressed" from="VBoxContainer/BotonContinuar" to="." method="_on_boton_continuar_pressed"]
+[connection signal="pressed" from="VBoxContainer/BotonSalir" to="." method="_on_boton_salir_pressed"]

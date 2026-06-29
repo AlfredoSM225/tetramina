@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bxo6msxl75awf"]
 
 [ext_resource type="Texture2D" uid="uid://c68d0voatw5ml" path="res://sprites/Trono.png" id="1_3kelo"]
+[ext_resource type="PackedScene" uid="uid://dtqchnnoh2hrf" path="res://scenes/menu_pausa.tscn" id="1_lenud"]
 [ext_resource type="PackedScene" uid="uid://dhwioybo0yjie" path="res://scenes/decoracion_jefe.tscn" id="4_t2qkj"]
 [ext_resource type="Texture2D" uid="uid://u85dbhxwx2b6" path="res://sprites/mainlev_build.png" id="5_0sf5j"]
 [ext_resource type="Texture2D" uid="uid://cp3nhdhcfx636" path="res://sprites/FondoDecoracion.png" id="5_lw3mk"]
@@ -18374,6 +18375,8 @@ size = Vector2(266, 517)
 size = Vector2(42, 138)
 
 [node name="Nivel1" type="Node2D" unique_id=2045379988]
+
+[node name="MenuPausa" parent="." unique_id=565945515 instance=ExtResource("1_lenud")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1865768404]
 texture_filter = 1

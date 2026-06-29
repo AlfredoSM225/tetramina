@@ -20,6 +20,7 @@ ScriptGlobal="*uid://bdjgtnxld8ht7"
 GameManager="*uid://k00qdhd41mwv"
 WorldState="*uid://cug5gb2rkrlbl"
 PlayerState="*uid://cy0c81vmyoxo3"
+SaveManager="*uid://cgn6qb13yot2b"
 
 [display]
 
