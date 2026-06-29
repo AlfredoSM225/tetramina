@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d3piptru5hv1l" path="res://scripts/PiezaBase.gd" id="1_gu44c"]
 [ext_resource type="PackedScene" uid="uid://utmjj82qqb83" path="res://scenes/bloque_individual.tscn" id="1_k4d2j"]
+[ext_resource type="AudioStream" uid="uid://ccv20pbkj4f3i" path="res://SoundEffects/movimientoPieza.wav" id="3_k26gi"]
 
 [node name="PiezaL" type="CharacterBody2D" unique_id=2111717301]
 texture_filter = 1
@@ -21,3 +22,7 @@ position = Vector2(-16, -48)
 
 [node name="BloqueIndividual4" parent="." unique_id=54688087 instance=ExtResource("1_k4d2j")]
 position = Vector2(16, 16)
+
+[node name="SonidoMover" type="AudioStreamPlayer" parent="." unique_id=397745220]
+stream = ExtResource("3_k26gi")
+volume_db = -4.0

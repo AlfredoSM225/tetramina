@@ -8,11 +8,12 @@ class_name PiezaBase
 @export var id_tileset: int = 1 
 @export var tile_map_layer: TileMapLayer 
 
-
 var esta_activa: bool = false 
 var en_caida_libre: bool = false
 var jugador_ref: CharacterBody2D = null 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+@onready var sonido_mover: AudioStreamPlayer = $SonidoMover
 
 # --- VARIABLES PARA EL CHECKPOINT ---
 @onready var id_unico = "pieza_" + str(global_position.x) + "_" + str(global_position.y)
@@ -143,6 +144,7 @@ func intentar_moverse(direccion: Vector2) -> void:
 	var colision = move_and_collide(direccion * grid_size, true)
 	if not colision:
 		global_position += direccion * grid_size
+		sonido_mover.play()
 
 func intentar_rotar() -> void:
 	if not puede_rotar: return

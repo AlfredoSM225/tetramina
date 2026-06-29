@@ -5,7 +5,12 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 const CLIMB_SPEED = 100.0 # Velocidad al subir y bajar la escalera
 
+@onready var sonido_salto: AudioStreamPlayer = $SonidoSalto
+@onready var sonido_muerte: AudioStreamPlayer = $SonidoMuerte
+@onready var sonido_recojer: AudioStreamPlayer = $SonidoRecojer
+@onready var sonido_error: AudioStreamPlayer = $Error
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 # Obtiene la gravedad de la configuración de Godot
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -58,6 +63,7 @@ func _physics_process(delta):
 		
 		var dir_vertical = 0
 		if Input.is_action_pressed("Up"):
+			
 			dir_vertical -= 1
 		if Input.is_action_pressed("Down"):
 			dir_vertical += 1
@@ -90,9 +96,12 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
+	
+
 	# Salto del jugador
 	if Input.is_action_just_pressed("Jump"):
 		velocity.y = JUMP_VELOCITY
+		sonido_salto.play()
 
 	# Movimiento horizontal y lógica de animaciones combinada
 	var direction = Input.get_axis("Left", "Right")
@@ -119,6 +128,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if pieza_controlada == null:
 			buscar_y_controlar_pieza()
 
+
 # Busca la pieza más cercana en la cueva
 func buscar_y_controlar_pieza():
 	var piezas = get_tree().get_nodes_in_group("Piezas")
@@ -135,8 +145,9 @@ func buscar_y_controlar_pieza():
 		escalando = false
 		pieza_controlada = pieza_mas_cercana
 		pieza_mas_cercana.activar_control(self)
+		sonido_recojer.play()
 		return
-		
+	
 	var mapa = get_tree().get_first_node_in_group("CapaPiezas") as TileMapLayer
 	if mapa:
 		var pos_local_jugador = mapa.to_local(global_position)
@@ -152,7 +163,10 @@ func buscar_y_controlar_pieza():
 					pieza_controlada = pieza_revivida
 					await get_tree().process_frame
 					pieza_revivida.activar_control(self)
+					sonido_recojer.play()
 					return
+		if pieza_controlada == null:
+			sonido_error.play()
 
 func recuperar_control():
 	pieza_controlada = null

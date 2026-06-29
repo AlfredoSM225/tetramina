@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cswdk3nx8jwfn"
+path="res://.godot/imported/13 - MMX - X Extra Life.wav-560bccd364c2be47ca5859fe9d0148bd.sample"
+
+[deps]
+
+source_file="res://SoundEffects/13 - MMX - X Extra Life.wav"
+dest_files=["res://.godot/imported/13 - MMX - X Extra Life.wav-560bccd364c2be47ca5859fe9d0148bd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ctboebyk432r2" path="res://sprites/Moneda3.png" id="3_251xu"]
 [ext_resource type="Texture2D" uid="uid://eioxi6jqdemw" path="res://sprites/Moneda4.png" id="4_gbw8t"]
 [ext_resource type="Texture2D" uid="uid://casxwc8vnheuc" path="res://sprites/Moneda5.png" id="5_v13fc"]
+[ext_resource type="AudioStream" uid="uid://cswdk3nx8jwfn" path="res://SoundEffects/13 - MMX - X Extra Life.wav" id="7_251xu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mkpt8"]
 animations = [{
@@ -45,5 +46,9 @@ sprite_frames = SubResource("SpriteFrames_mkpt8")
 position = Vector2(1.5258789e-05, -9.536743e-07)
 scale = Vector2(47.19612, -1.356147)
 shape = SubResource("RectangleShape2D_wdqex")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=728005538]
+stream = ExtResource("7_251xu")
+volume_db = -5.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

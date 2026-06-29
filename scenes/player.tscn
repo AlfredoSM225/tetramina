@@ -43,6 +43,9 @@
 [ext_resource type="Texture2D" uid="uid://bxij3bpb4k0hg" path="res://sprites/Run Chibi4.png" id="41_jlll7"]
 [ext_resource type="Texture2D" uid="uid://wkyw0t07fkq1" path="res://sprites/Run Chibi5.png" id="42_qk6i7"]
 [ext_resource type="Texture2D" uid="uid://d3akq8bbdgx53" path="res://sprites/Run Chibi6.png" id="43_6c3st"]
+[ext_resource type="AudioStream" uid="uid://deygeh5x8h5eg" path="res://SoundEffects/salto.wav" id="44_hhpqf"]
+[ext_resource type="AudioStream" uid="uid://uo4l84gnwqmd" path="res://SoundEffects/recojer pieza.wav" id="45_g5jhy"]
+[ext_resource type="AudioStream" uid="uid://c1vjjnw2q41a4" path="res://SoundEffects/error.wav" id="46_holxr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dqkch"]
 animations = [{
@@ -243,3 +246,15 @@ shape = SubResource("CapsuleShape2D_dqkch")
 position = Vector2(5, 16)
 shape = SubResource("CircleShape2D_fdfoy")
 debug_color = Color(0.8224654, 0.3806429, 0.34574577, 0.41960785)
+
+[node name="SonidoSalto" type="AudioStreamPlayer" parent="." unique_id=771028988]
+stream = ExtResource("44_hhpqf")
+
+[node name="SonidoMuerte" type="AudioStreamPlayer" parent="." unique_id=1466637906]
+
+[node name="SonidoRecojer" type="AudioStreamPlayer" parent="." unique_id=29321422]
+stream = ExtResource("45_g5jhy")
+
+[node name="Error" type="AudioStreamPlayer" parent="." unique_id=629769843]
+stream = ExtResource("46_holxr")
+volume_db = -5.0

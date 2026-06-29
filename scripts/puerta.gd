@@ -1,6 +1,8 @@
 extends StaticBody2D
 class_name Puerta
 
+@onready var sonido_abrir: AudioStreamPlayer = $Abrir
+@onready var sonido_cerrar: AudioStreamPlayer = $Cerrar
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 # Cuántos píxeles se moverá la puerta hacia abajo al abrirse
@@ -26,10 +28,13 @@ func set_abierta(abrir: bool) -> void:
 	
 	if abrir:
 		# Animamos la propiedad 'position' hacia la posición abierta
+		sonido_abrir.play()
 		tween.tween_property(self, "position", posicion_abierta, tiempo_animacion)
-		# Opcional: Si quieres desactivar la colisión por completo al abrirse, descomenta la siguiente línea:
-		# tween.tween_callback(func(): collision_shape.set_deferred("disabled", true))
+		
+
 	else:
 		# Si se cierra, reactivamos colisión y regresamos arriba
 		collision_shape.set_deferred("disabled", false)
+		sonido_cerrar.play()
 		tween.tween_property(self, "position", posicion_inicial, tiempo_animacion)
+		

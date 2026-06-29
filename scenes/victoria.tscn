@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://blsuaq43hp0m7" path="res://fonts/PixeloidSans-Bold.ttf" id="1_dj4ih"]
 [ext_resource type="Script" uid="uid://dk0mrobo2w1ra" path="res://scripts/victoria.gd" id="1_iw5au"]
 [ext_resource type="FontFile" uid="uid://c6eqbl3q5r32j" path="res://fonts/PixeloidSans.ttf" id="2_iw5au"]
-[ext_resource type="AudioStream" uid="uid://bhfru4t7xh8dh" path="res://Soundtrack/Creditos.ogg" id="4_dsxom"]
+[ext_resource type="AudioStream" uid="uid://y80dww1eha80" path="res://Soundtrack/creditos2.ogg" id="4_dsxom"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw5au"]
 bg_color = Color(0, 0, 0, 1)

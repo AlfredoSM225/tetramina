@@ -6,6 +6,9 @@ var registro_piezas = {}
 var celda_a_pieza = {}   
 signal lineas_borradas(cantidad)
 
+var sfx_linea = preload("res://SoundEffects/linea hecha.wav")
+var sfx_caida = preload("res://SoundEffects/caida.wav")
+
 func registrar_pieza(id_p: int, ruta: String, celdas: Array, id_tileset: int, offset_root: Vector2, rot: float):
 	registro_piezas[id_p] = {
 		"ruta_escena": ruta,
@@ -69,7 +72,7 @@ func revisar_lineas_completas():
 					if id_p in registro_piezas:
 						registro_piezas[id_p]["celdas"].erase(celda)
 					celda_a_pieza.erase(celda)
-		
+		reproducir_sfx_2d(sfx_linea, capa_piezas.global_position)
 		var mapas_colision = []
 		if get_tree().current_scene:
 			var todos_tilemaps = get_tree().current_scene.find_children("*", "TileMapLayer", true, false)
@@ -144,6 +147,7 @@ func aplicar_gravedad_aislada(capa: TileMapLayer, columnas_afectadas: Array, y_m
 				
 	# 2. BUCLE DE ANIMACIÓN
 	var cayendo = true
+	var un_bloque_choco: bool = false
 	while cayendo:
 		cayendo = false
 		
@@ -179,15 +183,21 @@ func aplicar_gravedad_aislada(capa: TileMapLayer, columnas_afectadas: Array, y_m
 				cayendo = true # Como algo se movió, repetiremos el bucle
 			else:
 				# Chocó con algo, ya no se mueve y se queda en su posición final
+				if source_id != -1 and not es_celda_libre(celda_abajo, capa, mapas_colision):
+					un_bloque_choco = true
+					reproducir_sfx_2d(sfx_caida, capa.global_position)
 				nuevos_bloques.append(celda)
 				
+				
 		bloques_a_mover = nuevos_bloques
-		
+	
 		# 3. LA PAUSA VISUAL (Magia de Godot)
 		if cayendo:
 			# Esperamos 0.05 segundos antes de que bajen el siguiente cuadro
 			await get_tree().create_timer(0.05).timeout
-
+	if un_bloque_choco:
+		reproducir_sfx_2d(sfx_caida, capa.global_position)
+		
 func intentar_recuperar_pieza(celda: Vector2i) -> CharacterBody2D:
 	if not celda_a_pieza.has(celda): return null
 	var id_p = celda_a_pieza[celda]
@@ -226,3 +236,17 @@ func intentar_recuperar_pieza(celda: Vector2i) -> CharacterBody2D:
 	
 	capa_piezas.get_parent().add_child(nueva_pieza)
 	return nueva_pieza
+
+func reproducir_sfx_2d(sonido: AudioStream, posicion_global: Vector2):
+	var reproductor = AudioStreamPlayer2D.new()
+	reproductor.stream = sonido
+	reproductor.global_position = posicion_global
+	reproductor.bus = "SFX" # Asignado al bus de efectos
+	
+	# Le decimos a Godot que añada el nodo a la escena actual
+	get_tree().current_scene.add_child(reproductor)
+	reproductor.play()
+	
+	# El secreto de oro: Cuando el sonido termine de sonar, el nodo se destruye 
+	# sólito para no dejar basura flotando en la memoria de la computadora.
+	reproductor.finished.connect(func(): reproductor.queue_free())

@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ba8mof56curlw" path="res://sprites/bloque.png" id="1_1b3uk"]
 [ext_resource type="Script" uid="uid://hrygbexyqxub" path="res://scripts/puerta.gd" id="1_gjhiy"]
+[ext_resource type="AudioStream" uid="uid://ddoyxhgxhxavv" path="res://SoundEffects/Door_balconyOpen.wav" id="3_3sl7q"]
+[ext_resource type="AudioStream" uid="uid://cgscwwi73t3p8" path="res://SoundEffects/Door_balconyClose.wav" id="4_csqxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjhiy"]
 size = Vector2(32, 160)
@@ -32,3 +34,10 @@ texture = ExtResource("1_1b3uk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=107502566]
 position = Vector2(16, 80)
 shape = SubResource("RectangleShape2D_gjhiy")
+
+[node name="Abrir" type="AudioStreamPlayer" parent="." unique_id=1727405301]
+stream = ExtResource("3_3sl7q")
+volume_db = -0.912
+
+[node name="Cerrar" type="AudioStreamPlayer" parent="." unique_id=1589202250]
+stream = ExtResource("4_csqxh")

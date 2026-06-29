@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
-
+@onready var sonido: AudioStreamPlayer = $AudioStreamPlayer
 # --- VARIABLES ÚNICAS PARA EL CHECKPOINT ---
 @onready var id_unico = "moneda_" + str(global_position.x) + "_" + str(global_position.y)
 var scene_path : String
@@ -22,6 +22,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Player") and not ya_recolectada:
 		ya_recolectada = true
+		sonido.play()
 		GameManager.contar_moneda() # Suma la moneda a tu contador global
 		
 		# En lugar de usar queue_free(), la desactivamos visual y físicamente
