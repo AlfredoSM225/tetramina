@@ -5,7 +5,7 @@ extends Node2D
 # Límites visuales por si el dispensador está pegado a una pared del nivel (para el Wall Kick)
 @export var ancho_en_columnas: int = 8
 # Tiempo de espera en segundos antes de poder pedir otra pieza
-@export var tiempo_cooldown: float = 1.0
+@export var tiempo_cooldown: float = 10.0
 
 @onready var spawn_point: Marker2D = $SpawnPoint
 @onready var zona_interaccion: Area2D = $ZonaInteraccion
