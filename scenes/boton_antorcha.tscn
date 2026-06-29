@@ -24,7 +24,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wm5y"]
-size = Vector2(80, 42)
+size = Vector2(80, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkpdp"]
 size = Vector2(80, 21)
@@ -37,7 +37,7 @@ sprite_frames = SubResource("SpriteFrames_8pfar")
 animation = &"A-Unpressed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1046388808]
-position = Vector2(0, 11)
+position = Vector2(0, 15)
 shape = SubResource("RectangleShape2D_8wm5y")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1394013317]
