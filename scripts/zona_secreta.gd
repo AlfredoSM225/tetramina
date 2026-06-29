@@ -18,8 +18,6 @@ func desvanecer_zona() -> void:
 	# Creamos la animación por código
 	var tween = create_tween()
 	
-	# Cambia el '0.5' por el tiempo que quieras. 
-	# Por ejemplo, '1.5' hará que tarde segundo y medio en desaparecer por completo.
 	tween.tween_property(capa_secreta, "modulate:a", 0.0, 1.5)
 	
 	# Esperamos a que termine la animación antes de borrar los nodos

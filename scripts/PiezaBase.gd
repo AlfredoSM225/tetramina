@@ -15,7 +15,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var sonido_mover: AudioStreamPlayer = $SonidoMover
 
-# --- VARIABLES PARA EL CHECKPOINT ---
+#Variables checkpoint
 @onready var id_unico = "pieza_" + str(global_position.x) + "_" + str(global_position.y)
 var scene_path : String
 
@@ -36,16 +36,15 @@ func _ready() -> void:
 			anim_sprite.animation = color_pieza
 			anim_sprite.frame = 0
 
-	# === APAGAR COLISIÓN DEL FONDO POR CÓDIGO ===
+	#Apagar colision por codigo
 	var fondo = get_tree().current_scene.find_child("Tile atras", true, false)
 	if fondo and "collision_enabled" in fondo:
-		# Si es un TileMapLayer de Godot 4, desactivamos sus físicas por completo
 		fondo.collision_enabled = false
 		
 
 func _physics_process(delta: float) -> void:
 	if not esta_activa:
-		# 1. Aplicamos gravedad a la velocidad si no estamos tocando el piso
+		#Aplicamos gravedad a la velocidad si no estamos tocando el piso
 		if not is_on_floor():
 			velocity.y += gravity * delta
 		else:
@@ -53,10 +52,10 @@ func _physics_process(delta: float) -> void:
 			
 		velocity.x = 0
 		
-		# 2. Movemos la pieza y registramos las colisiones
+		#Movemos la pieza y registramos las colisiones
 		move_and_slide()
 		
-		# === NUEVO: SISTEMA DE APLASTAMIENTO ===
+		#Aplastamiento
 		if en_caida_libre:
 			for i in get_slide_collision_count():
 				var colision = get_slide_collision(i)
@@ -64,16 +63,12 @@ func _physics_process(delta: float) -> void:
 				
 				# Revisamos si lo que acabamos de golpear es el Jugador
 				if cuerpo and cuerpo.is_in_group("Player"):
-					# get_normal() nos dice hacia dónde apunta la superficie chocada.
-					# Si la 'y' es negativa (apunta hacia arriba), golpeamos el techo del jugador (su cabeza)
 					if colision.get_normal().y < -0.5:
 						if cuerpo.has_method("morir"):
 							cuerpo.morir()
-							# Evitamos que la pieza se pinte en el TileMap sobre tu cadáver
 							en_caida_libre = false 
-						break # Ya lo mató, no necesitamos seguir revisando otros choques
+						break
 		
-		# 3. AHORA SÍ comprobamos si realmente acaba de chocar contra el suelo
 		if is_on_floor() and en_caida_libre:
 			fijar_en_mapa()
 
@@ -85,17 +80,12 @@ func activar_control(jugador: CharacterBody2D) -> void:
 	set_shader_seleccionable(false)
 	set_shader_en_uso(true)
 	
-	# === EL TRUCO: ROBAR LA CÁMARA ===
+	#Borra camara
 	var camara = jugador.get_node_or_null("Camera2D")
 	if camara:
 		camara.reparent(self)
 		camara.position = Vector2.ZERO 
 	
-	# ==========================================================
-	# CORRECCIÓN DE BUG: APAGAR COLISIONES TEMPORALMENTE
-	# ==========================================================
-	# Desactivamos el procesamiento de físicas por un instante para que 
-	# Godot no intente empujarnos bruscamente durante la teletransportación.
 	var shapes_a_apagar = []
 	for hijo in get_children():
 		if hijo is CollisionShape2D:
@@ -104,7 +94,6 @@ func activar_control(jugador: CharacterBody2D) -> void:
 	
 	if tile_map_layer:
 		for hijo in get_children():
-			# Usamos un Node2D o marcador para buscar la posición visual
 			if hijo is AnimatedSprite2D or hijo is Sprite2D or hijo is CollisionShape2D:
 				var pos_local = tile_map_layer.to_local(hijo.global_position)
 				var celda = tile_map_layer.local_to_map(pos_local)
@@ -112,22 +101,22 @@ func activar_control(jugador: CharacterBody2D) -> void:
 				var centro_celda = tile_map_layer.map_to_local(celda)
 				var centro_global = tile_map_layer.to_global(centro_celda)
 				
-				# Alineación perfecta al centro del Tile
+				# Alineación al centro del Tile
 				global_position = centro_global - hijo.position.rotated(rotation)
 				break 
 
 	# Reseteamos la velocidad para quitar cualquier inercia de la gravedad previa
 	velocity = Vector2.ZERO
 
-	# === REACTIVAR COLISIONES EN SU NUEVO LUGAR SEGURO ===
-	# Volvemos a encender las cajitas de colisión ahora que la pieza ya está bien posicionada
+	#Reactiva colisiónes en lugar seguro
+	# Volvemos a encender las cajas de colisión ahora que la pieza ya está bien posicionada
 	for shape in shapes_a_apagar:
 		shape.disabled = false
 		
 	esta_activa = true
 	en_caida_libre = false
 	
-	
+	#Movimiento de la pieza
 func _unhandled_input(event: InputEvent) -> void:
 	if not esta_activa:
 		return
@@ -209,8 +198,6 @@ func set_shader_en_uso(activar: bool) -> void:
 		if sprite.material:
 			sprite.material.set_shader_parameter("activado", activar)
 
-# --- FUNCIONES NUEVAS DEL SISTEMA DE CHECKPOINTS ---
-
 # Se llama automáticamente cuando el jugador pisa un Checkpoint
 func guardar_estado_en_checkpoint() -> void:
 	WorldState.set_state(scene_path, id_unico, "pos_x", global_position.x)
@@ -226,7 +213,6 @@ func cargar_estado_de_checkpoint() -> void:
 	var guardado_existe = WorldState.get_state(scene_path, id_unico, "existe", false)
 	
 	if guardado_existe:
-		# Si el jugador la estaba controlando en pleno reseteo, devolvemos la cámara de forma segura
 		if esta_activa:
 			desactivar_control()
 			

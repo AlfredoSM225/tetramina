@@ -1,6 +1,5 @@
 extends Area2D
 
-# Arrastra la puerta desde el árbol de escenas hacia esta propiedad en el Inspector
 @export var puerta_a_controlar: PuertaSensor
 
 func _ready() -> void:
@@ -14,4 +13,3 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		if body_entered.is_connected(_on_body_entered):
 			body_entered.disconnect(_on_body_entered)
-			print("🔒 Sensor de puerta usado. Desconectando detecciones futuras.")

@@ -1,6 +1,5 @@
 extends Area2D
 
-# Te permite elegir a qué nivel viajar desde el Inspector (.tscn)
 @export_file("*.tscn") var escena_destino: String = ""
 
 var botones_activos: int = 0
@@ -18,7 +17,7 @@ func _process(_delta: float) -> void:
 	if abierta and jugador_dentro and Input.is_action_just_pressed("Up"):
 		cambiar_de_nivel()
 
-# Estas funciones las llaman los botones automáticamente
+# Funciónes para los botones
 func registrar_boton_encendido() -> void:
 	botones_activos += 1
 	comprobar_puzle()
@@ -32,11 +31,11 @@ func registrar_boton_apagado() -> void:
 func comprobar_puzle() -> void:
 	if botones_activos >= 3:
 		abierta = true
-		$AnimatedSprite2D.play("abierta") # <-- Cambiado a tu animación cuando se activa
+		$AnimatedSprite2D.play("abierta")
 		print("¡Puzle resuelto! Los 3 botones están presionados. Puerta abierta.")
 	else:
 		abierta = false
-		$AnimatedSprite2D.play("cerrada") # <-- Cambiado a tu animación cuando se bloquea
+		$AnimatedSprite2D.play("cerrada")
 		print("Botones listos: ", botones_activos, "/3. Puerta bloqueada.")
 
 func _on_body_entered(body: Node2D) -> void:
@@ -52,8 +51,6 @@ func _on_body_exited(body: Node2D) -> void:
 func cambiar_de_nivel() -> void:
 	if escena_destino != "":
 		var current_scene_path = get_tree().current_scene.scene_file_path
-		# Limpiamos posición guardada para que el jugador aparezca en el inicio del nuevo mapa
 		if PlayerState.has_position(current_scene_path):
-			# Suponiendo que tu PlayerState tiene un método para borrar o limpiar
 			pass 
 		get_tree().change_scene_to_file(escena_destino)

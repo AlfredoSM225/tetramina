@@ -4,7 +4,7 @@ extends Node2D
 @export var tiempo_entre_piezas: float = 8.0
 @export var grid_size: int = 32
 
-# === CONFIGURACIÓN DE LÍMITE Y ACTIVACIÓN ===
+#Configuraciónes
 @export var max_piezas_a_generar: int = 5
 var piezas_generadas_actualmente: int = 0
 

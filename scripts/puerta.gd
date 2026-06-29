@@ -20,20 +20,18 @@ func _ready() -> void:
 
 # Esta función será llamada automáticamente por el botón
 func set_abierta(abrir: bool) -> void:
-	# Si ya había una animación ejecutándose, la detenemos para evitar saltos locos
+	# Si ya había una animación ejecutándose, la detenemos
 	if tween:
 		tween.kill()
 	
 	tween = create_tween().set_parallel(false).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	if abrir:
-		# Animamos la propiedad 'position' hacia la posición abierta
 		sonido_abrir.play()
 		tween.tween_property(self, "position", posicion_abierta, tiempo_animacion)
 		
 
 	else:
-		# Si se cierra, reactivamos colisión y regresamos arriba
 		collision_shape.set_deferred("disabled", false)
 		sonido_cerrar.play()
 		tween.tween_property(self, "position", posicion_inicial, tiempo_animacion)

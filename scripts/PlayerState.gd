@@ -1,6 +1,5 @@
 extends Node
 
-# Diccionario que guardará las posiciones: { "ruta_de_la_escena": Vector2(x, y) }
 var position := {}
 
 # Guarda la posición del jugador asociada a la escena actual
