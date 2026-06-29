@@ -91,42 +91,43 @@ func activar_control(jugador: CharacterBody2D) -> void:
 		camara.reparent(self)
 		camara.position = Vector2.ZERO 
 	
-	if tile_map_layer:
-		for hijo in get_children():
-			if hijo is CollisionShape2D or hijo is Node2D:
-				var pos_local = tile_map_layer.to_local(hijo.global_position)
-				
-				var celda_x = round((pos_local.x - grid_size / 2.0) / grid_size)
-				var celda_y = round((pos_local.y - grid_size / 2.0) / grid_size)
-				var celda_exacta = Vector2i(celda_x, celda_y)
-				
-				var centro_celda = tile_map_layer.map_to_local(celda_exacta)
-				var centro_global = tile_map_layer.to_global(centro_celda)
-				
-				global_position = centro_global - hijo.position.rotated(rotation)
-				break
-	esta_activa = true
-	en_caida_libre = false
-	jugador_ref = jugador
-	add_collision_exception_with(jugador)
+	# ==========================================================
+	# CORRECCIÓN DE BUG: APAGAR COLISIONES TEMPORALMENTE
+	# ==========================================================
+	# Desactivamos el procesamiento de físicas por un instante para que 
+	# Godot no intente empujarnos bruscamente durante la teletransportación.
+	var shapes_a_apagar = []
+	for hijo in get_children():
+		if hijo is CollisionShape2D:
+			hijo.disabled = true
+			shapes_a_apagar.append(hijo)
 	
-	# === EL SECRETO 1: ALINEACIÓN ABSOLUTA AL TILEMAP ===
 	if tile_map_layer:
 		for hijo in get_children():
-			if hijo is CollisionShape2D or hijo is Node2D:
-				# 1. Vemos en qué celda está tocando este bloque
+			# Usamos un Node2D o marcador para buscar la posición visual
+			if hijo is AnimatedSprite2D or hijo is Sprite2D or hijo is CollisionShape2D:
 				var pos_local = tile_map_layer.to_local(hijo.global_position)
 				var celda = tile_map_layer.local_to_map(pos_local)
 				
-				# 2. Le pedimos al TileMap el centro matemático PERFECTO de esa celda
 				var centro_celda = tile_map_layer.map_to_local(celda)
 				var centro_global = tile_map_layer.to_global(centro_celda)
 				
-				# 3. Anclamos toda la pieza para que el bloque quede en ese centro exacto
+				# Alineación perfecta al centro del Tile
 				global_position = centro_global - hijo.position.rotated(rotation)
-				break # Solo necesitamos hacerlo con el primer bloque
-				
-				
+				break 
+
+	# Reseteamos la velocidad para quitar cualquier inercia de la gravedad previa
+	velocity = Vector2.ZERO
+
+	# === REACTIVAR COLISIONES EN SU NUEVO LUGAR SEGURO ===
+	# Volvemos a encender las cajitas de colisión ahora que la pieza ya está bien posicionada
+	for shape in shapes_a_apagar:
+		shape.disabled = false
+		
+	esta_activa = true
+	en_caida_libre = false
+	
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if not esta_activa:
 		return
