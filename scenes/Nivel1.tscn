@@ -29,7 +29,7 @@
 [ext_resource type="Script" uid="uid://c4dssc3lo8v8o" path="res://scripts/zona_secreta_5.gd" id="25_gqvh0"]
 [ext_resource type="PackedScene" uid="uid://bn0spdv3calru" path="res://scenes/hud_monedas.tscn" id="26_xsk1d"]
 [ext_resource type="AudioStream" uid="uid://bcaekjmpscsmo" path="res://Soundtrack/nivel.ogg" id="30_f2o1r"]
-[ext_resource type="AudioStream" uid="uid://5dgho5e0rb4f" path="res://Soundtrack/waterdrop.wav" id="31_f4gya"]
+[ext_resource type="AudioStream" uid="uid://dtl6npoxkjfe1" path="res://Soundtrack/waterdrop.ogg" id="31_f4gya"]
 [ext_resource type="Script" uid="uid://bj0cvimqkgy3n" path="res://scripts/zone_muerte.gd" id="31_vjqsj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vjqsj"]
@@ -4173,11 +4173,13 @@ shape = SubResource("RectangleShape2D_gqvh0")
 stream = ExtResource("30_f2o1r")
 volume_db = -10.0
 autoplay = true
+parameters/looping = true
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=37900316]
 stream = ExtResource("31_f4gya")
 volume_db = -10.0
 autoplay = true
+parameters/looping = false
 
 [connection signal="body_entered" from="Salida" to="Salida" method="_on_body_entered"]
 [connection signal="body_exited" from="Salida" to="Salida" method="_on_body_exited"]

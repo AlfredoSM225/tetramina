@@ -19475,6 +19475,7 @@ position = Vector2(448, 96)
 stream = ExtResource("26_geghk")
 volume_db = -0.972
 autoplay = true
+parameters/looping = true
 
 [connection signal="body_entered" from="ZonaSecreta" to="ZonaSecreta" method="_on_body_entered"]
 [connection signal="body_entered" from="CamaraJefe" to="CamaraJefe" method="_on_body_entered"]

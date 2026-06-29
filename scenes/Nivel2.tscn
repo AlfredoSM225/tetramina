@@ -46,7 +46,7 @@
 [ext_resource type="Script" uid="uid://bwhk3wyv4nl6" path="res://scripts/zone_secreta_4.gd" id="41_gn2bc"]
 [ext_resource type="PackedScene" uid="uid://b7ldbq3yqr7gy" path="res://scenes/dispensador_piezas.tscn" id="44_80mrc"]
 [ext_resource type="AudioStream" uid="uid://bcaekjmpscsmo" path="res://Soundtrack/nivel.ogg" id="47_sr6xn"]
-[ext_resource type="AudioStream" uid="uid://5dgho5e0rb4f" path="res://Soundtrack/waterdrop.wav" id="48_vkos3"]
+[ext_resource type="AudioStream" uid="uid://dtl6npoxkjfe1" path="res://Soundtrack/waterdrop.ogg" id="47_vkos3"]
 [ext_resource type="PackedScene" uid="uid://ct6gf4w6jtuly" path="res://scenes/generador_nivel_2.tscn" id="49_vkos3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v52h"]
@@ -25332,11 +25332,13 @@ shape = SubResource("RectangleShape2D_tf3yt")
 stream = ExtResource("47_sr6xn")
 volume_db = -10.0
 autoplay = true
+parameters/looping = true
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1423737084]
-stream = ExtResource("48_vkos3")
+stream = ExtResource("47_vkos3")
 volume_db = -10.0
 autoplay = true
+parameters/looping = true
 
 [node name="GeneradorNivel2" parent="." unique_id=1350354769 instance=ExtResource("49_vkos3")]
 position = Vector2(-2528, 160)
