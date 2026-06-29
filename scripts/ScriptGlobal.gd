@@ -77,25 +77,43 @@ func revisar_lineas_completas():
 					if tm.tile_set.get_physics_layers_count() > 0:
 						mapas_colision.append(tm)
 		
-		# === EL SECRETO: AWAIT ===
-		# El código se pausará aquí y esperará a que termine toda la animación de caída
+
 		await aplicar_gravedad_aislada(capa_piezas, columnas_afectadas, y_max_borrado, celdas_borradas, mapas_colision)
 		
-		# Una vez que terminen de caer, volvemos a revisar por si hicieron COMBO
 		revisar_lineas_completas()
 
 func es_celda_libre(coord: Vector2i, capa_piezas: TileMapLayer, mapas_colision: Array) -> bool:
+	#¿Choca con otra pieza del Tetris?
 	if capa_piezas.get_cell_source_id(coord) != -1:
 		return false
 		
-	var global_pos = capa_piezas.to_global(capa_piezas.map_to_local(coord))
+#¿Choca con el escenario sólido (de 16x16 o cualquier tamaño)?
+	var centro_global = capa_piezas.to_global(capa_piezas.map_to_local(coord))
+
+	# Un bloque de 32x32 cubre 4 bloques de 16x16. 
+	# El offset (8 píxeles) nos sitúa exactamente en el centro de esos 4 cuadrantes.
+	var offset = capa_piezas.tile_set.tile_size.x / 4.0 
+	
+	var puntos_escaneo = [
+		centro_global + Vector2(-offset, -offset), # Arriba-Izquierda
+		centro_global + Vector2(offset, -offset),  # Arriba-Derecha
+		centro_global + Vector2(-offset, offset),  # Abajo-Izquierda
+		centro_global + Vector2(offset, offset)    # Abajo-Derecha
+	]
+	
 	for tm in mapas_colision:
-		var tm_local = tm.to_local(global_pos)
-		var tm_cell = tm.local_to_map(tm_local)
-		
-		if tm.get_cell_source_id(tm_cell) != -1:
-			return false
+		for punto in puntos_escaneo:
+			var tm_local = tm.to_local(punto)
+			var tm_cell = tm.local_to_map(tm_local)
 			
+			var tile_data = tm.get_cell_tile_data(tm_cell)
+			if tile_data:
+				var capas_fisicas = tm.tile_set.get_physics_layers_count()
+				for i in range(capas_fisicas):
+					# Si AL MENOS UNO de los 4 puntos toca un polígono de colisión, se detiene en seco.
+					if tile_data.get_collision_polygons_count(i) > 0:
+						return false
+						
 	return true
 
 # === CORRUTINA DE CAÍDA ANIMADA ===
