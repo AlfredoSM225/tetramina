@@ -1,0 +1,284 @@
+[gd_scene format=3 uid="uid://bpgci6do11m0a"]
+
+[ext_resource type="FontFile" uid="uid://blsuaq43hp0m7" path="res://fonts/PixeloidSans-Bold.ttf" id="1_dj4ih"]
+[ext_resource type="Script" uid="uid://dk0mrobo2w1ra" path="res://scripts/victoria.gd" id="1_iw5au"]
+[ext_resource type="FontFile" uid="uid://c6eqbl3q5r32j" path="res://fonts/PixeloidSans.ttf" id="2_iw5au"]
+[ext_resource type="AudioStream" uid="uid://bhfru4t7xh8dh" path="res://Soundtrack/Creditos.ogg" id="4_dsxom"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw5au"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Victoria" type="Control" unique_id=1117491678]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iw5au")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=779916680]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ContenedorStats" type="VBoxContainer" parent="." unique_id=1165664452]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 448.0
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="LabelTitulo" type="Label" parent="ContenedorStats" unique_id=1911810485]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_dj4ih")
+theme_override_font_sizes/font_size = 32
+text = "¡HAS ESCAPADO DE LA CUEVA!"
+horizontal_alignment = 1
+
+[node name="LabelNivel1" type="Label" parent="ContenedorStats" unique_id=242914958]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_iw5au")
+text = "Monedas Nivel 1: 0/3"
+horizontal_alignment = 1
+
+[node name="LabelNivel2" type="Label" parent="ContenedorStats" unique_id=1549801482]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_iw5au")
+text = "Monedas Nivel 2: 0/3"
+horizontal_alignment = 1
+
+[node name="LabelCreditos" type="Label" parent="." unique_id=1949006671]
+layout_mode = 0
+offset_top = 160.0
+offset_right = 960.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("2_iw5au")
+text = "TETRAMINA
+
+
+DIRECCIÓN GENERAL & PRODUCCIÓN
+
+Director del Proyecto
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+Productor Ejecutivo
+Alfredo Jr Santos
+
+Productor Asociado
+Edgar Julian Pasos Ramos
+
+Director Creativo
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+Jefe de Operaciones
+Alfredo Jr Santos
+
+
+DEPARTAMENTO DE PROGRAMACIÓN E INGENIERÍA
+
+Director de Tecnología (CTO)
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+Arquitecto de Software Principal
+Edgar Julian Pasos Ramos
+
+Programador Líder de Lógica Global
+Alfredo Jr Santos
+
+Ingeniero de Sistemas Físicos Avanzados
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+Especialista en Algoritmos de Cuadrícula
+Alfredo Jr Santos
+
+Desarrollador del Sistema de Escáner Continuo
+Alfredo Jr Santos
+
+Programador del Algoritmo del \"Radar de 4 Puntos\"
+Alfredo Jr Santos
+
+Especialista en Wall Kicks e Invasión de Muros
+Alfredo Jr Santos
+
+Ingeniero de Persistencia de Datos y Guardado JSON
+Edgar Julian Pasos Ramos
+
+Desarrollador del Árbol de Pausa (Process Mode)
+Alfredo Jr Santos
+
+Programador de Comportamientos del Jefe Final
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+Optimización de Memoria e Instanciamiento Local
+Edgar Julian Pasos Ramos
+
+Limpiador de Advertencias Amarillas y Bugs Fantasma
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+
+DISEÑO DE JUEGO (GAME DESIGN)
+
+Diseñador Principal de Niveles
+Alfredo Jr Santos
+
+Arquitecto de Puzzles y Acertijos Mecánicos
+Alfredo Jr Santos
+
+Diseñador del Pozo del Nivel 2 (1952px)
+Alfredo Jr Santos
+
+Equilibrio de Curva de Dificultad
+Alfredo Jr Santos
+
+Creador del Algoritmo \"El Hueco Mortal\" del Jefe
+Alfredo Jr Santos
+
+Especialista en Checkpoints Estratégicos
+Alfredo Jr Santos
+
+Diseñador de Interfaces de Usuario (UI/UX)
+Edgar Julian Pasos Ramos
+
+
+ARTE VISUAL Y ANIMACIÓN
+
+Director de Arte
+Edgar Julian Pasos Ramos
+
+Artista de Sprites Principal (Pixel Art)
+Edgar Julian Pasos Ramos
+
+Diseñador de Bloques de Colores
+Edgar Julian Pasos Ramos
+
+Animador de Personaje (Chibi)
+Edgar Julian Pasos Ramos
+
+Ilustrador de Fondos Oscuros de Cueva
+Edgar Julian Pasos Ramos
+
+Artista de Antorchas Animadas
+Edgar Julian Pasos Ramos
+
+Diseño de la Interfaz del HUD de Monedas
+Edgar Julian Pasos Ramos
+
+Especialista en Paleta de Colores de 16x16 y 32x32
+Edgar Julian Pasos Ramos
+
+Creador Visual del Panel Físico de Daño
+Edgar Julian Pasos Ramos
+
+
+AUDIO, MÚSICA Y EFECTOS DE SONIDO
+
+Director de Audio
+Edgar Julian Pasos Ramos
+
+Compositor de la Banda Sonora Original (OST)
+Edgar Julian Pasos Ramos
+
+Diseñador de Sonidos Ambientales
+Edgar Julian Pasos Ramos
+
+Ingeniero de Mezcla y Masterización
+Edgar Julian Pasos Ramos
+
+Compositor del Tema del Jefe Final
+Edgar Julian Pasos Ramos
+
+Efectos de Sonido (SFX) Eliminación de Líneas
+Edgar Julian Pasos Ramos
+
+Efectos de Sonido (SFX) Muerte por Aplastamiento
+Edgar Julian Pasos Ramos
+
+
+CONTROL DE CALIDAD (QA TESTING)
+
+Director de Control de Calidad
+Alfredo Jr Santos
+
+Líder de Control de Calidad
+Edgar Julian Pasos Ramos
+
+Tester Principal de Colisiones en Plataformas
+Alfredo Jr Santos
+
+Analista de Errores de Gravedad Aislada
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+Especialista en Romper el Juego Adrede
+Edgar Julian Pasos Ramos
+
+Beta Tester de Combate contra el Jefe
+Alfredo Jr Santos
+
+
+MARKETING, LOCALIZACIÓN Y LOGÍSTICA
+
+Director de Marketing y Publicidad
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+Traducción y Localización al Español Formal
+Alfredo Jr Santos
+
+Traducción y Localización al Francés (A2)
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+Community Manager & Relaciones Públicas
+Edgar Julian Pasos Ramos
+
+Especialista en Preparación de Café y Apoyo Moral
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+
+DEPARTAMENTO LEGAL Y RECURSOS HUMANOS
+
+Asesor Legal de Derechos de Tetraminas
+Alfredo Jr Santos
+
+Director de Recursos Humanos (HR)
+Edgar Julian Pasos Ramos
+
+Coordinador de Almuerzos y Descansos
+Alfredo Jr Santos
+
+Supervisor de que el Otro no se Duerma en el Teclado
+Alfredo Jr Santos & Edgar Julian Pasos Ramos
+
+
+AGRADECIMIENTOS ESPECIALES
+
+A Dios por no dejarnos romper el código a última hora.
+A la suite de Godot Engine 4 por procesar nuestras matemáticas locas.
+A las galletas y el café que hicieron posible las noches de desvelo.
+Y a ti, ¡JUGADOR!, por llegar hasta el fondo de la cueva y derrotar al jefe.
+
+
+¡GRACIAS POR JUGAR!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonVolver" type="Button" parent="." unique_id=1083923041]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 416.0
+offset_right = 960.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("2_iw5au")
+theme_override_styles/normal = SubResource("StyleBoxFlat_iw5au")
+text = "Volver al Menú Principa"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=381433560]
+stream = ExtResource("4_dsxom")
+autoplay = true
+
+[connection signal="pressed" from="BotonVolver" to="." method="_on_boton_volver_pressed"]

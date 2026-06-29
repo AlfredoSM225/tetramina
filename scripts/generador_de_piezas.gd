@@ -128,11 +128,18 @@ func _on_jugador_hace_linea(cantidad: int) -> void:
 func derrotar_jefe() -> void:
 	print("¡JEFE DERROTADO!")
 	
-	# 1. Apagamos el Timer para que deje de tirar basura
 	var timer = get_node_or_null("Timer")
 	if timer:
 		timer.stop()
 		
-	# 2. Desconectamos la señal para que no siga contando si haces más líneas
 	if ScriptGlobal.lineas_borradas.is_connected(_on_jugador_hace_linea):
 		ScriptGlobal.lineas_borradas.disconnect(_on_jugador_hace_linea)
+		
+
+	SaveManager.guardar_partida()
+	
+
+	await get_tree().create_timer(4.0).timeout
+	
+	# Cambiamos a la pantalla de victoria
+	get_tree().change_scene_to_file("res://scenes/victoria.tscn")

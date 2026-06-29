@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cmjiqn7tksip7"]
+
+[ext_resource type="Script" uid="uid://ch0t8ntv88er8" path="res://scripts/panel_vida_jefe.gd" id="1_nrqai"]
+[ext_resource type="FontFile" uid="uid://c6eqbl3q5r32j" path="res://fonts/PixeloidSans.ttf" id="1_qmorj"]
+
+[node name="PanelVidaJefe" type="Node2D" unique_id=95380449]
+script = ExtResource("1_nrqai")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1161688329]
+visible = false
+offset_right = 352.0
+offset_bottom = 160.0
+
+[node name="Label" type="Label" parent="." unique_id=125983513]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 320.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("1_qmorj")

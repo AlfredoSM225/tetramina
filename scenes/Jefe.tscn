@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cbyrwogeflatr" path="res://scenes/generador_de_piezas.tscn" id="21_lw3mk"]
 [ext_resource type="Texture2D" uid="uid://c5bigdyhi081d" path="res://sprites/gameboy.png" id="22_qacja"]
 [ext_resource type="Script" uid="uid://wcqyd65bogp4" path="res://scripts/zona_secreta.gd" id="23_31qpd"]
+[ext_resource type="PackedScene" uid="uid://cmjiqn7tksip7" path="res://scenes/panel_vida_jefe.tscn" id="25_vkwqi"]
 [ext_resource type="Script" uid="uid://djdnarwjs7r16" path="res://scripts/sensor_puerta.gd" id="27_ywm7u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_etjfg"]
@@ -19464,6 +19465,9 @@ texture = ExtResource("22_qacja")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1531218512]
 position = Vector2(-1088, 448)
 shape = SubResource("RectangleShape2D_vkwqi")
+
+[node name="PanelVidaJefe" parent="." unique_id=95380449 instance=ExtResource("25_vkwqi")]
+position = Vector2(448, 96)
 
 [connection signal="body_entered" from="ZonaSecreta" to="ZonaSecreta" method="_on_body_entered"]
 [connection signal="body_entered" from="CamaraJefe" to="CamaraJefe" method="_on_body_entered"]
