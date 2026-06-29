@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ct6gf4w6jtuly"]
+
+[ext_resource type="Script" uid="uid://f80j45188xhw" path="res://scenes/generador_nivel_2.gd" id="1_qp8u1"]
+[ext_resource type="PackedScene" uid="uid://b3woxie4158rd" path="res://scenes/pieza_i.tscn" id="2_wo21s"]
+[ext_resource type="PackedScene" uid="uid://clwak2svxauco" path="res://scenes/pieza_L.tscn" id="3_xfk0e"]
+[ext_resource type="PackedScene" uid="uid://c45k7avd4kc8v" path="res://scenes/pieza_LI.tscn" id="4_mjoyl"]
+[ext_resource type="PackedScene" uid="uid://bkdhgvwbowuaq" path="res://scenes/pieza_o.tscn" id="5_it1tp"]
+[ext_resource type="PackedScene" uid="uid://byntrrs0cj477" path="res://scenes/pieza_s.tscn" id="6_yu5co"]
+[ext_resource type="PackedScene" uid="uid://crst01jvi6jcb" path="res://scenes/pieza_t.tscn" id="7_pjlou"]
+[ext_resource type="PackedScene" uid="uid://cgqtdrfg7enyf" path="res://scenes/pieza_z.tscn" id="8_y46js"]
+
+[node name="GeneradorNivel2" type="Node2D" unique_id=1350354769]
+script = ExtResource("1_qp8u1")
+piezas_disponibles = Array[PackedScene]([ExtResource("2_wo21s"), ExtResource("3_xfk0e"), ExtResource("4_mjoyl"), ExtResource("5_it1tp"), ExtResource("6_yu5co"), ExtResource("7_pjlou"), ExtResource("8_y46js")])
+
+[node name="Timer" type="Timer" parent="." unique_id=55493036]
+wait_time = 8.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1060630363]
+position = Vector2(32, 32)
+rect = Rect2(-32, -32, 256, 256)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

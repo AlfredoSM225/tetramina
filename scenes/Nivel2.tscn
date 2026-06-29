@@ -48,7 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://b7ldbq3yqr7gy" path="res://scenes/dispensador_piezas.tscn" id="44_80mrc"]
 [ext_resource type="AudioStream" uid="uid://bcaekjmpscsmo" path="res://Soundtrack/nivel.ogg" id="47_sr6xn"]
 [ext_resource type="AudioStream" uid="uid://5dgho5e0rb4f" path="res://Soundtrack/waterdrop.wav" id="48_vkos3"]
-[ext_resource type="PackedScene" uid="uid://cbyrwogeflatr" path="res://scenes/generador_de_piezas.tscn" id="49_vkos3"]
+[ext_resource type="PackedScene" uid="uid://ct6gf4w6jtuly" path="res://scenes/generador_nivel_2.tscn" id="49_vkos3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v52h"]
 texture = ExtResource("5_0qid7")
@@ -25356,10 +25356,9 @@ stream = ExtResource("48_vkos3")
 volume_db = -10.0
 autoplay = true
 
-[node name="GeneradorDePiezas" parent="." unique_id=788842092 instance=ExtResource("49_vkos3")]
-position = Vector2(5024, 224)
-profundidad_en_filas = 9
-lineas_para_vencer = 3
+[node name="GeneradorNivel2" parent="." unique_id=1350354769 instance=ExtResource("49_vkos3")]
+position = Vector2(5088, 224)
+max_piezas_a_generar = 10
 
 [connection signal="body_entered" from="ZonaSecreta" to="ZonaSecreta" method="_on_body_entered"]
 [connection signal="body_entered" from="ZonaSectreta2" to="ZonaSectreta2" method="_on_body_entered"]
