@@ -19358,7 +19358,7 @@ tile_set = SubResource("TileSet_k7spm")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=846297350 instance=ExtResource("14_aue6r")]
-position = Vector2(-352, 512)
+position = Vector2(-960, 512)
 
 [node name="PiezasTetris" type="Node2D" parent="." unique_id=1471653679]
 
