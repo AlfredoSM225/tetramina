@@ -3,7 +3,7 @@ extends Area2D
 @onready var camara_zona: Camera2D = $Camera2D
 
 # Variables exportadas para asignar el fondo y el marco en el Inspector
-@export var fondo_gameboy: Node2D # Flexible (Acepta TileMap, TileMapLayer o fondos)
+@export var fondo_gameboy: Node2D  # Flexible (Acepta TileMap, TileMapLayer o fondos)
 @export var sprite_gameboy: Node2D # Flexible (Acepta Sprite2D, AnimatedSprite2D, etc.)
 
 var resolucion_original: Vector2i
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		# Guardamos el modo de pantalla justo antes de cambiarlo (por si el jugador activó Fullscreen en el camino)
+		# Guardamos el modo de pantalla justo antes de cambiarlo por si mutó en el camino
 		modo_pantalla_original = DisplayServer.window_get_mode()
 		
 		camara_jugador_ref = body.get_node_or_null("Camera2D")
@@ -34,7 +34,7 @@ func _on_body_entered(body: Node2D) -> void:
 			camara_jugador_ref.enabled = false
 
 		# === PASAR A MODO VENTANA OBLIGATORIO ===
-		# Si está en pantalla completa, la ventana no se puede encoger, así que la forzamos a modo ventana
+		# Si está en pantalla completa, la ventana no se puede encoger, la forzamos a ventana
 		if modo_pantalla_original == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
