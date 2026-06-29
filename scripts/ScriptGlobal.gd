@@ -4,6 +4,7 @@ var bloques_para_linea = 8
 
 var registro_piezas = {} 
 var celda_a_pieza = {}   
+signal lineas_borradas(cantidad)
 
 func registrar_pieza(id_p: int, ruta: String, celdas: Array, id_tileset: int, offset_root: Vector2, rot: float):
 	registro_piezas[id_p] = {
@@ -76,7 +77,7 @@ func revisar_lineas_completas():
 				if tm != capa_piezas and tm.tile_set != null:
 					if tm.tile_set.get_physics_layers_count() > 0:
 						mapas_colision.append(tm)
-		
+		lineas_borradas.emit(lineas_a_borrar.size())
 
 		await aplicar_gravedad_aislada(capa_piezas, columnas_afectadas, y_max_borrado, celdas_borradas, mapas_colision)
 		

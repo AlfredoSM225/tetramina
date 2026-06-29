@@ -5,10 +5,17 @@ extends Node2D
 @export var ancho_en_columnas: int = 8
 @export var profundidad_en_filas: int = 16
 
+@export var lineas_para_vencer: int = 5
+var lineas_actuales: int = 0
+
 # Variables internas que calculará solo
 var columna_prohibida: int = -999
 var columnas_mapa: Array = []
 var y_fondo_pozo: int = 0
+
+func _ready() -> void:
+	if ScriptGlobal.has_signal("lineas_borradas"):
+		ScriptGlobal.lineas_borradas.connect(_on_jugador_hace_linea)
 
 func _on_timer_timeout() -> void:
 	lanzar_pieza_basura()
@@ -107,3 +114,25 @@ func lanzar_pieza_basura() -> void:
 			nueva_pieza.en_caida_libre = true
 		
 		mapa.get_parent().add_child(nueva_pieza)
+		
+
+func _on_jugador_hace_linea(cantidad: int) -> void:
+	# Sumamos el daño (las líneas)
+	lineas_actuales += cantidad
+	print("El jefe recibió daño: ", lineas_actuales, "/", lineas_para_vencer)
+	
+	# Comprobamos si ya lo matamos
+	if lineas_actuales >= lineas_para_vencer:
+		derrotar_jefe()
+		
+func derrotar_jefe() -> void:
+	print("¡JEFE DERROTADO!")
+	
+	# 1. Apagamos el Timer para que deje de tirar basura
+	var timer = get_node_or_null("Timer")
+	if timer:
+		timer.stop()
+		
+	# 2. Desconectamos la señal para que no siga contando si haces más líneas
+	if ScriptGlobal.lineas_borradas.is_connected(_on_jugador_hace_linea):
+		ScriptGlobal.lineas_borradas.disconnect(_on_jugador_hace_linea)
