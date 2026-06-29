@@ -98,10 +98,12 @@ func _physics_process(delta):
 
 	
 
-	# Salto del jugador
 	if Input.is_action_just_pressed("Jump"):
-		velocity.y = JUMP_VELOCITY
-		sonido_salto.play()
+		# El jugador puede saltar si está en el suelo O si el salto infinito global está activado
+		if is_on_floor() or ScriptGlobal.salto_infinito_permitido:
+			velocity.y = JUMP_VELOCITY
+			if has_node("SonidoSalto"):
+				$SonidoSalto.play()
 
 	# Movimiento horizontal y lógica de animaciones combinada
 	var direction = Input.get_axis("Left", "Right")

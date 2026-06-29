@@ -2,6 +2,8 @@ extends Node
 
 var bloques_para_linea = 8
 
+var salto_infinito_permitido: bool = false
+
 var registro_piezas = {} 
 var celda_a_pieza = {}   
 signal lineas_borradas(cantidad)

@@ -16,7 +16,8 @@ var y_fondo_pozo: int = 0
 func _ready() -> void:
 	if ScriptGlobal.has_signal("lineas_borradas"):
 		ScriptGlobal.lineas_borradas.connect(_on_jugador_hace_linea)
-
+	ScriptGlobal.salto_infinito_permitido = true
+	
 func _on_timer_timeout() -> void:
 	lanzar_pieza_basura()
 
@@ -127,7 +128,7 @@ func _on_jugador_hace_linea(cantidad: int) -> void:
 		
 func derrotar_jefe() -> void:
 	print("¡JEFE DERROTADO!")
-	
+	ScriptGlobal.salto_infinito_permitido = false
 	var timer = get_node_or_null("Timer")
 	if timer:
 		timer.stop()
