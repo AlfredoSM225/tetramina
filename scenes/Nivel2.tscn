@@ -11911,6 +11911,7 @@ texture = ExtResource("6_p6s85")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0qid7"]
 texture = ExtResource("9_tf3yt")
+use_texture_padding = false
 4:1/0 = 0
 5:1/0 = 0
 41:1/0 = 0
