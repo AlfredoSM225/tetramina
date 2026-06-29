@@ -45,7 +45,6 @@ func _on_boton_nivel_2_pressed() -> void:
 
 func _on_boton_jefe_pressed() -> void:
 	preparar_nivel_nuevo()
-	# Asegúrate de que el nombre de la escena del jefe sea el correcto aquí
 	get_tree().change_scene_to_file("res://scenes/Jefe.tscn")
 
 func _on_boton_regresar_pressed() -> void:

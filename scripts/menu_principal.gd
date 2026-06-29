@@ -1,15 +1,14 @@
 extends Control
 
 @onready var boton_continuar: Button = $VBoxContainer/BotonContinuar
+@onready var nuevo: Button = $VBoxContainer/BotonNuevo
 
 func _ready() -> void:
-	# Verificamos si existe el archivo que creamos con el SaveManager
 	if FileAccess.file_exists(SaveManager.SAVE_PATH):
 		boton_continuar.disabled = false
 	else:
-		# Si no hay partida, apagamos el botón para que no pueda presionarlo
 		boton_continuar.disabled = true
-
+	nuevo.grab_focus()
 func _on_boton_nuevo_pressed() -> void:
 	SaveManager.borrar_partida()
 	if WorldState.scene_states:

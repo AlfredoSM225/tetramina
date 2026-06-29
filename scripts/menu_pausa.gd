@@ -12,7 +12,6 @@ func _ready() -> void:
 	panel_menu.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
-	# "ui_cancel" es la tecla ESCAPE en teclado por defecto, o el botón Start/Options en mando
 	if event.is_action_pressed("ui_cancel") and not esta_muerto:
 		if get_tree().paused:
 			reanudar_juego()
@@ -24,7 +23,7 @@ func pausar_juego() -> void:
 	panel_menu.show()
 	lbl_titulo.text = "PAUSA"
 	btn_continuar.show()
-	btn_continuar.grab_focus() # Para que el mando pueda navegar
+	btn_continuar.grab_focus() 
 
 func reanudar_juego() -> void:
 	get_tree().paused = false
@@ -37,7 +36,6 @@ func mostrar_pantalla_muerte() -> void:
 	panel_menu.show()
 	lbl_titulo.text = "HAS MUERTO"
 	
-	# Ocultamos el botón "Continuar" porque estás muerto
 	btn_continuar.hide() 
 	btn_reiniciar.grab_focus()
 
