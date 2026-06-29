@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b7ldbq3yqr7gy"]
+
+[ext_resource type="Script" uid="uid://dr1sg04swghp0" path="res://scripts/dispensador_piezas.gd" id="1_6j5ke"]
+[ext_resource type="Texture2D" uid="uid://dr4jtc64i0do3" path="res://sprites/Dispenser.png" id="2_krd4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6j5ke"]
+size = Vector2(49, 58)
+
+[node name="DispensadorPiezas" type="Node2D" unique_id=44967930]
+texture_filter = 1
+scale = Vector2(2, 2)
+script = ExtResource("1_6j5ke")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=67334837]
+texture = ExtResource("2_krd4j")
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=940054692]
+position = Vector2(-4, -32)
+
+[node name="ZonaInteraccion" type="Area2D" parent="." unique_id=610533756]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZonaInteraccion" unique_id=1027146828]
+position = Vector2(-60.5, 3)
+shape = SubResource("RectangleShape2D_6j5ke")
+
+[connection signal="body_entered" from="ZonaInteraccion" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="ZonaInteraccion" to="." method="_on_body_exited"]

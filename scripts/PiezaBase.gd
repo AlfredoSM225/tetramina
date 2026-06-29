@@ -20,7 +20,6 @@ var scene_path : String
 
 func _ready() -> void:
 	add_to_group("Piezas")
-	# Añadimos al grupo global reseteable para el sistema de checkpoints
 	add_to_group("Reseteables")
 	scene_path = get_tree().current_scene.scene_file_path
 	
@@ -35,6 +34,12 @@ func _ready() -> void:
 		if anim_sprite:
 			anim_sprite.animation = color_pieza
 			anim_sprite.frame = 0
+
+	# === APAGAR COLISIÓN DEL FONDO POR CÓDIGO ===
+	var fondo = get_tree().current_scene.find_child("Tile atras", true, false)
+	if fondo and "collision_enabled" in fondo:
+		# Si es un TileMapLayer de Godot 4, desactivamos sus físicas por completo
+		fondo.collision_enabled = false
 		
 
 func _physics_process(delta: float) -> void:
