@@ -24,7 +24,7 @@ func lanzar_pieza_basura() -> void:
 	var mapa = get_tree().get_first_node_in_group("CapaPiezas") as TileMapLayer
 	if not mapa: return
 
-	# CONFIGURACIÓN DINÁMICA (Solo ocurre la primera vez)
+	#Configuración del generador
 	if columna_prohibida == -999:
 		# El jefe busca en qué celda exacta del mapa lo colocaste en el editor
 		var pos_celda_jefe = mapa.local_to_map(mapa.to_local(global_position))
@@ -52,7 +52,7 @@ func lanzar_pieza_basura() -> void:
 			if celda.y < cima_columnas[celda.x]:
 				cima_columnas[celda.x] = celda.y
 
-	# ENCONTRAR LA COLUMNA MÁS VACÍA
+	#Encontrar columna vacia
 	var columna_elegida = -1
 	var y_mas_profundo = -999999
 
@@ -64,7 +64,7 @@ func lanzar_pieza_basura() -> void:
 			y_mas_profundo = cima_columnas[x]
 			columna_elegida = x
 
-# CREAR Y LANZAR LA PIEZA
+#Crear y lanzar pieza
 	if columna_elegida != -1 and piezas_disponibles.size() > 0:
 		var escena_aleatoria = piezas_disponibles.pick_random()
 		var nueva_pieza = escena_aleatoria.instantiate() as CharacterBody2D
@@ -84,7 +84,6 @@ func lanzar_pieza_basura() -> void:
 		
 		nueva_pieza.global_position = pos_global_spawn - offset_primer_bloque
 		
-		# EL WALL KICK (Sensor de paredes)
 		var limite_izq = columnas_mapa[0]
 		var limite_der = columnas_mapa[-1]
 		var ajuste_columnas = 0
@@ -109,7 +108,7 @@ func lanzar_pieza_basura() -> void:
 			var tamano_celda = mapa.tile_set.tile_size.x # Extrae automáticamente el 32x32
 			nueva_pieza.global_position.x += ajuste_columnas * tamano_celda
 
-		# soltamos con físicas
+		#Soltamos con físicas
 		if "en_caida_libre" in nueva_pieza:
 			nueva_pieza.en_caida_libre = true
 		
@@ -117,7 +116,7 @@ func lanzar_pieza_basura() -> void:
 		
 
 func _on_jugador_hace_linea(cantidad: int) -> void:
-	# Sumamos el daño (las líneas)
+	# Sumamos el daño
 	lineas_actuales += cantidad
 	print("El jefe recibió daño: ", lineas_actuales, "/", lineas_para_vencer)
 	

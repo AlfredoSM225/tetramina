@@ -12,7 +12,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var hay_peso_ahora = false
 	
-	# === PASO 1: OBJETOS FÍSICOS (Jugador o Piezas sueltas) ===
+	#Objetos fisicos, jugador o piezas
 	var cuerpos = area.get_overlapping_bodies()
 	for cuerpo in cuerpos:
 		if cuerpo != self and not (cuerpo is TileMapLayer):
@@ -20,38 +20,35 @@ func _physics_process(delta: float) -> void:
 				hay_peso_ahora = true
 				break
 			
-	# === PASO 2: BLOQUES FIJADOS EN EL TILEMAP ===
+	# Bloques en el TileMap
 	if not hay_peso_ahora:
-		# Subimos 24 píxeles para posicionarnos en el centro del bloque de arriba
 		var pos_arriba = global_position + Vector2(0, -24) 
 		
 		# Buscamos todos los TileMapLayers en la escena
 		var tilemaps = get_tree().current_scene.find_children("*", "TileMapLayer", true, false)
 		for tm in tilemaps:
-			# OBTENER EL NOMBRE EN MINÚSCULAS
 			var nombre_mapa = tm.name.to_lower()
 			
-			# FILTRO CRÍTICO: Si es el fondo ("tile atras", "fondo", "escenario"), lo ignoramos
+			#Si es el fondo ("tile atras", "fondo", "escenario"), lo ignoramos
 			if "atras" in nombre_mapa or "fondo" in nombre_mapa or tm.is_in_group("Escenario"):
 				continue
 				
 			var celda = tm.local_to_map(tm.to_local(pos_arriba))
-			# Si hay un bloque pintado en esa coordenada (ID diferente de -1)
 			if tm.get_cell_source_id(celda) != -1:
 				hay_peso_ahora = true
 				break
 
-	# === PASO 3: CAMBIO DE ESTADO ANIMACIÓN Y PUERTA ===
+	# Cambio de estado
 	if hay_peso_ahora and not estado_previo:
 		estado_previo = true
 		sprite.play("Pressed")
 		if puerta_objetivo:
 			puerta_objetivo.set_abierta(true)
-			print("🔴 Botón activado correctamente.")
+			print("Botón presionado")
 			
 	elif not hay_peso_ahora and estado_previo:
 		estado_previo = false
 		sprite.play("Unpressed")
 		if puerta_objetivo:
 			puerta_objetivo.set_abierta(false)
-			print("⚪ Botón liberado.")
+			print("Botón liberado")

@@ -16,7 +16,6 @@ func reiniciar_monedas() -> void:
 	monedas_actualizadas.emit(monedas_recolectadas)
 
 # Dentro de GameManager.gd
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_K:
 		# Reiniciamos las monedas del nivel

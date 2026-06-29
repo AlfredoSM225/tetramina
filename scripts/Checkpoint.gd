@@ -3,7 +3,6 @@ extends Area2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var activado: bool = false
-# Generamos un ID único usando sus coordenadas para que no se confunda con otros checkpoints
 @onready var id_unico = "checkpoint_" + str(global_position.x) + "_" + str(global_position.y)
 var scene_path : String
 
@@ -12,7 +11,6 @@ func _ready() -> void:
 	
 	body_entered.connect(_on_body_entered)
 	
-	# === COMPROBACIÓN DE PERSISTENCIA ===
 	# Esperamos un frame para asegurarnos de que WorldState esté listo
 	await get_tree().process_frame
 	
@@ -31,16 +29,16 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		sprite.play("encendida")
 		
-		# Guardamos en el almacén global que ESTE checkpoint ya se prendió para siempre
+		# Guardamos en el almacén global que este checkpoint ya se prendió
 		WorldState.set_state(scene_path, id_unico, "ya_activado", true)
 		
 		guardar_aqui_checkpoint(body.global_position)
 
 func guardar_aqui_checkpoint(posicion_jugador: Vector2) -> void:
-	# 1. Guardamos las coordenadas del robot en tu script global PlayerState
+	# Guardamos las coordenadas del jugador en el script global PlayerState
 	PlayerState.save_position(scene_path, posicion_jugador)
 	
-	# 2. Le ordenamos a todas las monedas y piezas mecánicas del grupo que tomen su "foto"
+	# Ordenamos a todas las monedas y piezas mecánicas del grupo que tomen su snapshot
 	get_tree().call_group("Reseteables", "guardar_estado_en_checkpoint")
 	
 	print("¡Punto de control guardado permanentemente en la memoria del mundo!")
