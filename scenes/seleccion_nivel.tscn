@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://bihfyo17vdlgj"]
+
+[ext_resource type="Script" uid="uid://c7slxy4fauien" path="res://scripts/seleccion_nivel.gd" id="1_gm5vd"]
+[ext_resource type="FontFile" uid="uid://blsuaq43hp0m7" path="res://fonts/PixeloidSans-Bold.ttf" id="1_xgg74"]
+[ext_resource type="FontFile" uid="uid://c6eqbl3q5r32j" path="res://fonts/PixeloidSans.ttf" id="2_pupi3"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pupi3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm5vd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iep14"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmqia"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wnq2"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pupi3"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="SeleccionNivel" type="Control" unique_id=131384548]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gm5vd")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=706773255]
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 480.0
+texture = SubResource("CanvasTexture_pupi3")
+
+[node name="Label" type="Label" parent="." unique_id=1660510669]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("1_xgg74")
+theme_override_font_sizes/font_size = 32
+text = "Seleccionar Nivel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=702237882]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 960.0
+offset_bottom = 416.0
+theme_override_constants/separation = 96
+alignment = 1
+
+[node name="Nivel1" type="VBoxContainer" parent="HBoxContainer" unique_id=1776002508]
+layout_mode = 2
+
+[node name="BotonNivel1" type="Button" parent="HBoxContainer/Nivel1" unique_id=1837808827]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pupi3")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_gm5vd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Nivel 1"
+
+[node name="LabelMonedas1" type="Label" parent="HBoxContainer/Nivel1" unique_id=911680002]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pupi3")
+text = "Monedas:
+0/3"
+horizontal_alignment = 1
+
+[node name="Nivel2" type="VBoxContainer" parent="HBoxContainer" unique_id=1363653345]
+layout_mode = 2
+
+[node name="BotonNivel2" type="Button" parent="HBoxContainer/Nivel2" unique_id=247377574]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pupi3")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_mmqia")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Nivel 2"
+
+[node name="LabelMonedas2" type="Label" parent="HBoxContainer/Nivel2" unique_id=1727176357]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pupi3")
+text = "Monedas:
+0/3"
+horizontal_alignment = 1
+
+[node name="Jefe" type="VBoxContainer" parent="HBoxContainer" unique_id=445573295]
+layout_mode = 2
+
+[node name="BotonJefe" type="Button" parent="HBoxContainer/Jefe" unique_id=670914946]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pupi3")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wnq2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Jefe Final"
+
+[node name="BotonRegresar" type="Button" parent="." unique_id=355556187]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 416.0
+offset_right = 956.0
+offset_bottom = 479.0
+theme_override_fonts/font = ExtResource("2_pupi3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pupi3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Volver al Menú"
+
+[connection signal="pressed" from="HBoxContainer/Nivel1/BotonNivel1" to="." method="_on_boton_nivel_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/Nivel2/BotonNivel2" to="." method="_on_boton_nivel_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/Jefe/BotonJefe" to="." method="_on_boton_jefe_pressed"]
+[connection signal="pressed" from="BotonRegresar" to="." method="_on_boton_regresar_pressed"]

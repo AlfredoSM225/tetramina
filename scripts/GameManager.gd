@@ -10,3 +10,7 @@ func contar_moneda() -> void:
 	monedas_actualizadas.emit(monedas_recolectadas)
 	if monedas_recolectadas == total_monedas:
 		print("¡Nivel completado!")
+
+func reiniciar_monedas() -> void:
+	monedas_recolectadas = 0
+	monedas_actualizadas.emit(monedas_recolectadas)

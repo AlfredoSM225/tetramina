@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://dtqchnnoh2hrf"]
+
+[ext_resource type="Script" uid="uid://d2a3lve25y7yy" path="res://scripts/menu_pausa.gd" id="1_1cdjc"]
+[ext_resource type="FontFile" uid="uid://blsuaq43hp0m7" path="res://fonts/PixeloidSans-Bold.ttf" id="1_jhjql"]
+[ext_resource type="FontFile" uid="uid://c6eqbl3q5r32j" path="res://fonts/PixeloidSans.ttf" id="2_v2jgs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pupi3"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iep14"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[node name="MenuPausa" type="CanvasLayer" unique_id=565945515]
+process_mode = 3
+script = ExtResource("1_1cdjc")
+
+[node name="Control" type="Control" parent="." unique_id=1543359814]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=897434453]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=11983062]
+layout_mode = 0
+offset_left = 416.0
+offset_right = 544.0
+offset_bottom = 480.0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="LabelTitulo" type="Label" parent="Control/VBoxContainer" unique_id=2087407665]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jhjql")
+theme_override_font_sizes/font_size = 32
+text = "PAUSA"
+horizontal_alignment = 1
+
+[node name="BotonContinuar" type="Button" parent="Control/VBoxContainer" unique_id=1195658479]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_v2jgs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pupi3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Continuar"
+
+[node name="BotonReiniciar" type="Button" parent="Control/VBoxContainer" unique_id=473605802]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_v2jgs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pupi3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iep14")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iep14")
+text = "Reiniciar Nivel"
+
+[node name="BotonSalir" type="Button" parent="Control/VBoxContainer" unique_id=1459567787]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_v2jgs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pupi3")
+text = "Salir al Menú"
+
+[connection signal="pressed" from="Control/VBoxContainer/BotonContinuar" to="." method="_on_boton_continuar_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/BotonReiniciar" to="." method="_on_boton_reiniciar_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/BotonSalir" to="." method="_on_boton_salir_pressed"]

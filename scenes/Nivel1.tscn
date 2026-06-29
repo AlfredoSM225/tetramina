@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://b3k6w1caxsgwk"]
 
 [ext_resource type="Texture2D" uid="uid://oylohopv60ka" path="res://sprites/background1.png" id="1_37hpt"]
+[ext_resource type="PackedScene" uid="uid://dtqchnnoh2hrf" path="res://scenes/menu_pausa.tscn" id="1_f2o1r"]
 [ext_resource type="Texture2D" uid="uid://bva6kgh2u5ah0" path="res://sprites/background2.png" id="2_5dgib"]
 [ext_resource type="Texture2D" uid="uid://c18g5ankawqhv" path="res://sprites/background3.png" id="3_al5x1"]
 [ext_resource type="Texture2D" uid="uid://dd23tsga4dpt8" path="res://sprites/background4a.png" id="4_eogdn"]
@@ -3958,6 +3959,8 @@ size = Vector2(84.5, 123)
 size = Vector2(330.5, 11)
 
 [node name="Nivel2" type="Node2D" unique_id=2045379988]
+
+[node name="MenuPausa" parent="." unique_id=565945515 instance=ExtResource("1_f2o1r")]
 
 [node name="Fondo" type="Node2D" parent="." unique_id=526551433]
 

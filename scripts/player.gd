@@ -165,7 +165,14 @@ func set_en_escalera(valor: bool) -> void:
 # --- FUNCIONES DEL SISTEMA DE CHECKPOINTS ---
 
 func morir() -> void:
-	reiniciar_a_checkpoint(false)
+	var menu_pausa = get_tree().current_scene.get_node_or_null("MenuPausa")
+	
+	if menu_pausa and menu_pausa.has_method("mostrar_pantalla_muerte"):
+		# Si existe el menú, disparamos la pantalla roja de Game Over
+		menu_pausa.mostrar_pantalla_muerte()
+	else:
+		# Sistema de respaldo por si olvidaste poner el menú en algún nivel
+		reiniciar_a_checkpoint(false)
 
 func reiniciar_a_checkpoint(restaurar_mundo: bool) -> void:
 	var current_scene_path := get_tree().current_scene.scene_file_path
