@@ -106,12 +106,20 @@ func activar_control(jugador: CharacterBody2D) -> void:
 				break 
 
 	# Reseteamos la velocidad para quitar cualquier inercia de la gravedad previa
+# Reseteamos la velocidad para quitar cualquier inercia de la gravedad previa
 	velocity = Vector2.ZERO
 
-	#Reactiva colisiónes en lugar seguro
-	# Volvemos a encender las cajas de colisión ahora que la pieza ya está bien posicionada
+	# Volvemos a encender las cajitas de colisión ahora que la pieza ya está bien posicionada
 	for shape in shapes_a_apagar:
 		shape.disabled = false
+		
+	# Verificamos si al forzar la posición a la cuadrícula la pieza quedó traslapada con el mapa.
+	# move_and_collide(Vector2.ZERO, true) devuelve una colisión si el objeto ya está empotrado.
+	var intentos_desatasco = 3
+	while move_and_collide(Vector2.ZERO, true) and intentos_desatasco > 0:
+		# Si está atascada, la empujamos una celda hacia arriba para liberarla
+		global_position.y -= grid_size
+		intentos_desatasco -= 1
 		
 	esta_activa = true
 	en_caida_libre = false

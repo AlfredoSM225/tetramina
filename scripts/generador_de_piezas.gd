@@ -71,7 +71,7 @@ func lanzar_pieza_basura() -> void:
 		var nueva_pieza = escena_aleatoria.instantiate() as CharacterBody2D
 		
 		var rotaciones_posibles = [0.0, PI/2, PI, 3*PI/2]
-		nueva_pieza.rotation = rotaciones_posibles.pick_random()
+		#nueva_pieza.rotation = rotaciones_posibles.pick_random()
 		
 		var offset_primer_bloque = Vector2.ZERO
 		for hijo in nueva_pieza.get_children():

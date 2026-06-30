@@ -12,7 +12,7 @@ func _ready() -> void:
 	panel_menu.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel") and not esta_muerto:
+	if event.is_action_pressed("pause") and not esta_muerto:
 		if get_tree().paused:
 			reanudar_juego()
 		else:
